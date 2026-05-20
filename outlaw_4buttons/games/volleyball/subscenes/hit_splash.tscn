@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://4r1y8xnikerh"]
+
+[ext_resource type="Texture2D" uid="uid://dncpv0rru0g5" path="res://sprites/impact.png" id="1_e8ma5"]
+[ext_resource type="Texture2D" uid="uid://bcrewqlbowf0r" path="res://sprites/impact_stroke.png" id="2_kb0j3"]
+
+[node name="HitSplash" type="Node3D"]
+
+[node name="Offset" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.76375)
+
+[node name="Sprite3D4" type="Sprite3D" parent="Offset"]
+transform = Transform3D(0.0806819, 0, 0, 0, 0.0806819, 0, 0, 0, 0.0806819, -0.00957406, 0.0834304, 0)
+modulate = Color(0.863013, 0.819921, 0.762014, 1)
+texture = ExtResource("1_e8ma5")
+
+[node name="Sprite3D6" type="Sprite3D" parent="Offset"]
+transform = Transform3D(0.0806819, 0, 0, 0, 0.0806819, 0, 0, 0, 0.0806819, -0.00957406, 0.0834304, -0.302734)
+modulate = Color(0.863013, 0.819921, 0.762014, 1)
+texture = ExtResource("1_e8ma5")
+
+[node name="Sprite3D5" type="Sprite3D" parent="Offset"]
+transform = Transform3D(0.0806819, 0, 0, 0, 0.0806819, 0, 0, 0, 0.0806819, -0.00957406, 0.0834304, -0.160522)
+modulate = Color(0.288783, 0.247126, 0.293011, 1)
+texture = ExtResource("2_kb0j3")

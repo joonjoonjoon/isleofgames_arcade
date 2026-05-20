@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cxh1bpsi8qmqw"
+path="res://.godot/imported/Sound 41.wav-e9c74f8688afbccf2635557a31fb02f1.sample"
+
+[deps]
+
+source_file="res://games/volleyball/audio/grunts2/Sound 41.wav"
+dest_files=["res://.godot/imported/Sound 41.wav-e9c74f8688afbccf2635557a31fb02f1.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

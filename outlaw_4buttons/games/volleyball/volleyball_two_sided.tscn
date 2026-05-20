@@ -1,0 +1,792 @@
+[gd_scene load_steps=30 format=3 uid="uid://b08uibq2pp21l"]
+
+[ext_resource type="Script" uid="uid://k7vdkyl8uunx" path="res://games/volleyball/scripts/game_manager.gd" id="1_5y7lb"]
+[ext_resource type="Script" uid="uid://d4k0fnixu6n0b" path="res://games/volleyball/scripts/debug_draw.gd" id="2_fa07c"]
+[ext_resource type="Texture2D" uid="uid://djptsiuu7g3vr" path="res://games/volleyball/sprites/UI/Border1.png" id="2_mudpm"]
+[ext_resource type="PackedScene" uid="uid://b130xr2rok7xf" path="res://games/volleyball/subscenes/guy_two_sided.tscn" id="3_5y7lb"]
+[ext_resource type="Material" uid="uid://7h1wwk3qtkrb" path="res://games/volleyball/materials/ground.tres" id="4_mdtra"]
+[ext_resource type="Texture2D" uid="uid://bbykdm4b8rw33" path="res://games/volleyball/sprites/UI/ScoreFillStroke.png" id="4_rkpdd"]
+[ext_resource type="Texture2D" uid="uid://do1yabhmk3cu1" path="res://games/volleyball/sprites/UI/PortraitMask.png" id="5_2geje"]
+[ext_resource type="Script" uid="uid://foa64qa1glf4" path="res://games/volleyball/scripts/ball.gd" id="5_fa07c"]
+[ext_resource type="Material" uid="uid://pww52d1ix0av" path="res://games/volleyball/materials/ball.tres" id="5_qq0bc"]
+[ext_resource type="Material" uid="uid://bojvh5p3omn6u" path="res://games/volleyball/materials/ball_trail.tres" id="6_jnxqd"]
+[ext_resource type="Texture2D" uid="uid://d2a8sm0ujna4t" path="res://games/volleyball/sprites/UI/PortraitBorder.png" id="6_oah0h"]
+[ext_resource type="Texture2D" uid="uid://dtrq8ofbpo65y" path="res://games/volleyball/sprites/head2.tres" id="7_5gvu6"]
+[ext_resource type="Material" uid="uid://363mvaicfv01" path="res://games/volleyball/materials/bg.tres" id="7_btiip"]
+[ext_resource type="Material" uid="uid://cqiw6gga3yey1" path="res://games/volleyball/materials/ball_fill.tres" id="8_kh1rs"]
+[ext_resource type="Material" uid="uid://c02konn0bc3ha" path="res://games/volleyball/materials/bg2.tres" id="8_mdtra"]
+[ext_resource type="Material" uid="uid://c06vfvnbx4kj5" path="res://games/volleyball/materials/score_pip_0.tres" id="9_qq0bc"]
+[ext_resource type="Material" uid="uid://deyuqb6wcxjtk" path="res://games/volleyball/materials/score_pip_off.tres" id="10_d6aoq"]
+[ext_resource type="Material" uid="uid://uy7io0a314ys" path="res://games/volleyball/materials/score_pip_1.tres" id="11_ccta2"]
+[ext_resource type="Script" uid="uid://dfh2uiqfr862v" path="res://games/volleyball/scripts/audio_manager.gd" id="12_ccta2"]
+[ext_resource type="Texture2D" uid="uid://b4oinbgq6k4jf" path="res://games/volleyball/sprites/UI/ScoreFillMask.png" id="16_0q3mo"]
+[ext_resource type="Script" uid="uid://dhb3fqf8xsvqm" path="res://games/volleyball/scripts/head_cam.gd" id="21_mrve1"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_rkpdd"]
+viewport_path = NodePath("HeadCam_2")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_oah0h"]
+viewport_path = NodePath("HeadCam_1")
+
+[sub_resource type="QuadMesh" id="QuadMesh_kh1rs"]
+size = Vector2(2.56, 1.44)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_kh1rs"]
+viewport_path = NodePath("SubUI/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kh1rs"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_kh1rs")
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ggjlk"]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xvx2k"]
+radius = 0.2
+
+[sub_resource type="SphereMesh" id="SphereMesh_wtvov"]
+radius = 0.2
+height = 0.4
+
+[node name="Joints3D" type="Node3D"]
+script = ExtResource("1_5y7lb")
+
+[node name="SubUI" type="Node3D" parent="."]
+process_mode = 3
+
+[node name="SubViewport" type="SubViewport" parent="SubUI"]
+transparent_bg = true
+gui_embed_subwindows = true
+size = Vector2i(2560, 1440)
+render_target_update_mode = 4
+
+[node name="Control" type="Control" parent="SubUI/SubViewport"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 2560.0
+offset_bottom = 1440.0
+
+[node name="TextureRect" type="TextureRect" parent="SubUI/SubViewport/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -2560.0
+offset_bottom = 1440.0
+grow_horizontal = 0
+texture = ExtResource("2_mudpm")
+
+[node name="ScoreBar_Right" type="Control" parent="SubUI/SubViewport/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScoreFill_Right" type="TextureRect" parent="SubUI/SubViewport/Control/ScoreBar_Right"]
+clip_children = 1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -938.825
+offset_top = 42.825
+offset_right = -31.825
+offset_bottom = 893.825
+grow_horizontal = 0
+texture = ExtResource("16_0q3mo")
+
+[node name="ColorRect" type="ColorRect" parent="SubUI/SubViewport/Control/ScoreBar_Right/ScoreFill_Right"]
+layout_mode = 0
+offset_left = -133.0
+offset_top = -8.0
+offset_right = 1067.0
+offset_bottom = 856.0
+
+[node name="ScoreFillStroke_Right" type="TextureRect" parent="SubUI/SubViewport/Control/ScoreBar_Right"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -949.0
+offset_top = 32.0
+offset_right = -19.0
+offset_bottom = 907.0
+grow_horizontal = 0
+texture = ExtResource("4_rkpdd")
+
+[node name="ScoreBar_Left" type="Control" parent="SubUI/SubViewport/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2560.0
+offset_right = 2560.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(-1, 1)
+
+[node name="ScoreFill_Right" type="TextureRect" parent="SubUI/SubViewport/Control/ScoreBar_Left"]
+clip_children = 1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -938.825
+offset_top = 42.825
+offset_right = -31.825
+offset_bottom = 893.825
+grow_horizontal = 0
+texture = ExtResource("16_0q3mo")
+
+[node name="ColorRect" type="ColorRect" parent="SubUI/SubViewport/Control/ScoreBar_Left/ScoreFill_Right"]
+layout_mode = 0
+offset_left = -133.0
+offset_top = -8.0
+offset_right = 1067.0
+offset_bottom = 856.0
+
+[node name="ScoreFillStroke_Right" type="TextureRect" parent="SubUI/SubViewport/Control/ScoreBar_Left"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -949.0
+offset_top = 32.0
+offset_right = -19.0
+offset_bottom = 907.0
+grow_horizontal = 0
+texture = ExtResource("4_rkpdd")
+
+[node name="Portrait_Right" type="Control" parent="SubUI/SubViewport/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="SubUI/SubViewport/Control/Portrait_Right"]
+clip_children = 1
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -448.0
+offset_top = -504.0
+offset_right = -31.0
+offset_bottom = -73.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("5_2geje")
+
+[node name="TextureRect2" type="TextureRect" parent="SubUI/SubViewport/Control/Portrait_Right/TextureRect"]
+layout_mode = 0
+offset_left = -38.0
+offset_top = -29.0
+offset_right = 474.0
+offset_bottom = 483.0
+texture = SubResource("ViewportTexture_rkpdd")
+
+[node name="TextureRect2" type="TextureRect" parent="SubUI/SubViewport/Control/Portrait_Right"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -460.0
+offset_top = -515.0
+offset_right = -19.0
+offset_bottom = -60.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("6_oah0h")
+
+[node name="Portrait_Left" type="Control" parent="SubUI/SubViewport/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="SubUI/SubViewport/Control/Portrait_Left"]
+clip_children = 1
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = -503.0
+offset_right = 457.0
+offset_bottom = -72.0
+grow_vertical = 0
+texture = ExtResource("5_2geje")
+flip_h = true
+
+[node name="TextureRect2" type="TextureRect" parent="SubUI/SubViewport/Control/Portrait_Left/TextureRect"]
+layout_mode = 0
+offset_left = -38.0
+offset_top = -29.0
+offset_right = 474.0
+offset_bottom = 483.0
+texture = SubResource("ViewportTexture_oah0h")
+flip_h = true
+
+[node name="TextureRect2" type="TextureRect" parent="SubUI/SubViewport/Control/Portrait_Left"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 27.0
+offset_top = -515.0
+offset_right = 468.0
+offset_bottom = -60.0
+grow_vertical = 0
+texture = ExtResource("6_oah0h")
+flip_h = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubUI"]
+transform = Transform3D(4.00034, 0, 0, 0, 4.00034, 0, 0, 0, 4.00034, 0, 1.58267, 2.48069)
+mesh = SubResource("QuadMesh_kh1rs")
+surface_material_override/0 = SubResource("StandardMaterial3D_kh1rs")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="UI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Node2D" type="Node2D" parent="."]
+script = ExtResource("2_fa07c")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.563, 8.829)
+projection = 1
+size = 5.871
+
+[node name="Guy1" parent="." instance=ExtResource("3_5y7lb")]
+transform = Transform3D(-0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, -1.344, -0.00873248, 0)
+key_left_alt = 4194322
+key_right_alt = 4194328
+is_flipped = true
+
+[node name="Torso_Upper" parent="Guy1/Torso" index="1"]
+modulate = Color(0.247059, 0.403922, 0.439216, 1)
+
+[node name="Head" parent="Guy1/Torso/Head" index="2"]
+transform = Transform3D(0.0842356, 3.49246e-10, 0, -3.49246e-10, 0.0842356, 0, 0, 0, 0.0842356, -0.00334275, 0.259468, 0)
+modulate = Color(0.678431, 0.309804, 0.309804, 1)
+texture = ExtResource("7_5gvu6")
+
+[node name="Arm" parent="Guy1/Torso/Arm_Right" index="2"]
+modulate = Color(0.678431, 0.309804, 0.309804, 1)
+
+[node name="Arm" parent="Guy1/Torso/Arm_Left" index="2"]
+modulate = Color(0.678431, 0.309804, 0.309804, 1)
+
+[node name="Leg" parent="Guy1/Torso/Leg_Right" index="2"]
+modulate = Color(0.678431, 0.309804, 0.309804, 1)
+
+[node name="Leg" parent="Guy1/Torso/Leg_Left" index="2"]
+modulate = Color(0.678431, 0.309804, 0.309804, 1)
+
+[node name="Guy2" parent="." instance=ExtResource("3_5y7lb")]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 1.34406, -0.00873248, 0)
+key_left = 74
+key_left_alt = 4194326
+key_right = 75
+key_right_alt = 4194320
+
+[node name="Ground_Left" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.454, -1.402, 0)
+visible = false
+use_collision = true
+size = Vector3(6.88622, 1.15872, 1)
+material = ExtResource("4_mdtra")
+
+[node name="Ground_Right" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.454, -1.40172, 0)
+visible = false
+use_collision = true
+size = Vector3(6.88622, 1.15872, 1)
+material = ExtResource("4_mdtra")
+
+[node name="Ground_Left2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.454, -1.45174, 0)
+use_collision = true
+size = Vector3(6.88622, 1.15872, 1)
+material = ExtResource("4_mdtra")
+
+[node name="Ground_Right2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.454, -1.45146, 0)
+use_collision = true
+size = Vector3(6.88622, 1.15872, 1)
+material = ExtResource("4_mdtra")
+
+[node name="Bottom" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.69593, 0)
+use_collision = true
+size = Vector3(13.7949, 4.11307, 1)
+material = ExtResource("4_mdtra")
+
+[node name="Net" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.075414, 0)
+material_override = ExtResource("4_mdtra")
+use_collision = true
+
+[node name="Wall" type="CSGBox3D" parent="Net"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+use_collision = true
+size = Vector3(0.281494, 3, 1)
+material = ExtResource("4_mdtra")
+
+[node name="Top" type="CSGCylinder3D" parent="Net"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.542759, 0)
+radius = 0.143066
+height = 1.0
+sides = 16
+smooth_faces = false
+
+[node name="Ball" type="RigidBody3D" parent="."]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, -1.3283, 0.958309, 0)
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+mass = 4.0
+physics_material_override = SubResource("PhysicsMaterial_ggjlk")
+gravity_scale = 0.25
+sleeping = true
+contact_monitor = true
+max_contacts_reported = 3
+script = ExtResource("5_fa07c")
+trail_material = ExtResource("6_jnxqd")
+ball_color = Color(0.705882, 0.639216, 0.54902, 1)
+bg_color = Color(0.862745, 0.819608, 0.760784, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ball"]
+shape = SubResource("SphereShape3D_xvx2k")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ball"]
+material_override = ExtResource("5_qq0bc")
+mesh = SubResource("SphereMesh_wtvov")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Ball"]
+transform = Transform3D(0.721972, 0, 0, 0, 0.721972, 0, 0, 0, 0.721972, 0, 0, 1.49807)
+material_override = ExtResource("8_kh1rs")
+mesh = SubResource("SphereMesh_wtvov")
+
+[node name="BallSpawn_Left" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3283, 0.958309, 0)
+
+[node name="BallSpawn_Right" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.328, 0.957961, 0)
+
+[node name="ArchFG" type="Node3D" parent="."]
+
+[node name="Wall_Left" type="CSGBox3D" parent="ArchFG"]
+transform = Transform3D(-4.37114e-08, -0.999999, 0, 0.999999, -4.37114e-08, 0, 0, 0, 1, -4.97194, 3, 0)
+use_collision = true
+size = Vector3(10, 4, 1)
+material = ExtResource("4_mdtra")
+
+[node name="Wall_Left2" type="CSGBox3D" parent="ArchFG"]
+transform = Transform3D(-4.37114e-08, -0.999999, 0, 0.999999, -4.37114e-08, 0, 0, 0, 1, -4.92833, 3, 0)
+visible = false
+use_collision = true
+size = Vector3(10, 4, 1)
+material = ExtResource("4_mdtra")
+
+[node name="Wall_Right" type="CSGBox3D" parent="ArchFG"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 4.9833, 3, 0)
+use_collision = true
+size = Vector3(10, 4, 1)
+material = ExtResource("4_mdtra")
+
+[node name="Wall_Right2" type="CSGBox3D" parent="ArchFG"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 4.95604, 3, 0)
+visible = false
+use_collision = true
+size = Vector3(10, 4, 1)
+material = ExtResource("4_mdtra")
+
+[node name="Arch" type="CSGCombiner3D" parent="ArchFG"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.738067, 0)
+material_override = ExtResource("4_mdtra")
+use_collision = true
+
+[node name="Ceiling" type="CSGBox3D" parent="ArchFG/Arch"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+use_collision = true
+size = Vector3(10, 10, 1)
+material = ExtResource("4_mdtra")
+
+[node name="Cylinder" type="CSGCylinder3D" parent="ArchFG/Arch"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.0223494, 0, 0)
+operation = 2
+radius = 2.96826
+sides = 64
+smooth_faces = false
+
+[node name="Arch2" type="CSGCombiner3D" parent="ArchFG"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.738067, 0)
+visible = false
+material_override = ExtResource("4_mdtra")
+use_collision = true
+
+[node name="Ceiling" type="CSGBox3D" parent="ArchFG/Arch2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+use_collision = true
+size = Vector3(10, 10, 1)
+material = ExtResource("4_mdtra")
+
+[node name="Cylinder" type="CSGCylinder3D" parent="ArchFG/Arch2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.0103283, 0, 0)
+operation = 2
+radius = 2.94043
+sides = 64
+smooth_faces = false
+
+[node name="ArchBG" type="Node3D" parent="."]
+transform = Transform3D(0.861981, 0, 0, 0, 0.861981, 0, 0, 0, 0.861981, 0, 0, -2.6507)
+
+[node name="Wall_Left" type="CSGBox3D" parent="ArchBG"]
+transform = Transform3D(-4.37114e-08, -0.999999, 0, 0.999999, -4.37114e-08, 0, 0, 0, 1, -5, 3, 0)
+use_collision = true
+size = Vector3(10, 4, 1)
+material = ExtResource("7_btiip")
+
+[node name="Wall_Right" type="CSGBox3D" parent="ArchBG"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 5, 3, 0)
+use_collision = true
+size = Vector3(10, 4, 1)
+material = ExtResource("7_btiip")
+
+[node name="Arch" type="CSGCombiner3D" parent="ArchBG"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.738067, 0)
+material_override = ExtResource("7_btiip")
+use_collision = true
+
+[node name="Ceiling" type="CSGBox3D" parent="ArchBG/Arch"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+use_collision = true
+size = Vector3(10, 10, 1)
+material = ExtResource("4_mdtra")
+
+[node name="Cylinder" type="CSGCylinder3D" parent="ArchBG/Arch"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+operation = 2
+radius = 3.0
+sides = 64
+smooth_faces = false
+
+[node name="ArchBG2" type="Node3D" parent="."]
+transform = Transform3D(0.735846, 0, 0, 0, 0.735846, 0, 0, 0, 0.735846, 0, 0, -3.55707)
+
+[node name="Wall_Left" type="CSGBox3D" parent="ArchBG2"]
+transform = Transform3D(-4.37114e-08, -0.999999, 0, 0.999999, -4.37114e-08, 0, 0, 0, 1, -5, 3, 0)
+material_override = ExtResource("8_mdtra")
+use_collision = true
+size = Vector3(10, 4, 1)
+material = ExtResource("7_btiip")
+
+[node name="Wall_Right" type="CSGBox3D" parent="ArchBG2"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 5, 3, 0)
+material_override = ExtResource("8_mdtra")
+use_collision = true
+size = Vector3(10, 4, 1)
+material = ExtResource("7_btiip")
+
+[node name="Arch" type="CSGCombiner3D" parent="ArchBG2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.738067, 0)
+material_override = ExtResource("8_mdtra")
+use_collision = true
+
+[node name="Ceiling" type="CSGBox3D" parent="ArchBG2/Arch"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+use_collision = true
+size = Vector3(10, 10, 1)
+material = ExtResource("4_mdtra")
+
+[node name="Cylinder" type="CSGCylinder3D" parent="ArchBG2/Arch"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+operation = 2
+radius = 3.0
+sides = 64
+smooth_faces = false
+
+[node name="ScorePips" type="Node3D" parent="."]
+visible = false
+
+[node name="Left" type="Node3D" parent="ScorePips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.738067, 0)
+
+[node name="Pip_0" type="Node3D" parent="ScorePips/Left"]
+
+[node name="Pip_Off" type="CSGSphere3D" parent="ScorePips/Left/Pip_0"]
+transform = Transform3D(4.6427e-16, 1.06213e-08, 0.242986, 0.242986, -1.06213e-08, 0, 1.06213e-08, 0.242987, -1.06213e-08, -3.2, 0, 0.483521)
+material_override = ExtResource("10_d6aoq")
+radial_segments = 24
+rings = 12
+
+[node name="Pip_On" type="CSGSphere3D" parent="ScorePips/Left/Pip_0"]
+transform = Transform3D(4.6427e-16, 1.06213e-08, 0.242986, 0.242986, -1.06213e-08, 0, 1.06213e-08, 0.242987, -1.06213e-08, -3.2, 0, 0.483521)
+material_override = ExtResource("9_qq0bc")
+radial_segments = 24
+rings = 12
+
+[node name="Pip_1" type="Node3D" parent="ScorePips/Left"]
+transform = Transform3D(0.994522, 0.104528, 0, -0.104528, 0.994522, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Pip_Off" type="CSGSphere3D" parent="ScorePips/Left/Pip_1"]
+transform = Transform3D(4.6427e-16, 1.06213e-08, 0.242986, 0.242986, -1.06213e-08, 0, 1.06213e-08, 0.242987, -1.06213e-08, -3.2, 0, 0.483521)
+material_override = ExtResource("10_d6aoq")
+radial_segments = 24
+rings = 12
+
+[node name="Pip_On" type="CSGSphere3D" parent="ScorePips/Left/Pip_1"]
+transform = Transform3D(4.6427e-16, 1.06213e-08, 0.242986, 0.242986, -1.06213e-08, 0, 1.06213e-08, 0.242987, -1.06213e-08, -3.2, 0, 0.483521)
+material_override = ExtResource("9_qq0bc")
+radial_segments = 24
+rings = 12
+
+[node name="Pip_2" type="Node3D" parent="ScorePips/Left"]
+transform = Transform3D(0.978148, 0.207912, 0, -0.207912, 0.978148, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Pip_Off" type="CSGSphere3D" parent="ScorePips/Left/Pip_2"]
+transform = Transform3D(4.6427e-16, 1.06213e-08, 0.242986, 0.242986, -1.06213e-08, 0, 1.06213e-08, 0.242987, -1.06213e-08, -3.2, 0, 0.483521)
+material_override = ExtResource("10_d6aoq")
+radial_segments = 24
+rings = 12
+
+[node name="Pip_On" type="CSGSphere3D" parent="ScorePips/Left/Pip_2"]
+transform = Transform3D(4.6427e-16, 1.06213e-08, 0.242986, 0.242986, -1.06213e-08, 0, 1.06213e-08, 0.242987, -1.06213e-08, -3.2, 0, 0.483521)
+material_override = ExtResource("9_qq0bc")
+radial_segments = 24
+rings = 12
+
+[node name="Pip_3" type="Node3D" parent="ScorePips/Left"]
+transform = Transform3D(0.951056, 0.309017, 0, -0.309017, 0.951056, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Pip_Off" type="CSGSphere3D" parent="ScorePips/Left/Pip_3"]
+transform = Transform3D(4.6427e-16, 1.06213e-08, 0.242986, 0.242986, -1.06213e-08, 0, 1.06213e-08, 0.242987, -1.06213e-08, -3.2, 0, 0.483521)
+material_override = ExtResource("10_d6aoq")
+radial_segments = 24
+rings = 12
+
+[node name="Pip_On" type="CSGSphere3D" parent="ScorePips/Left/Pip_3"]
+transform = Transform3D(4.6427e-16, 1.06213e-08, 0.242986, 0.242986, -1.06213e-08, 0, 1.06213e-08, 0.242987, -1.06213e-08, -3.2, 0, 0.483521)
+material_override = ExtResource("9_qq0bc")
+radial_segments = 24
+rings = 12
+
+[node name="Pip_4" type="Node3D" parent="ScorePips/Left"]
+transform = Transform3D(0.913545, 0.406737, 0, -0.406737, 0.913545, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Pip_Off" type="CSGSphere3D" parent="ScorePips/Left/Pip_4"]
+transform = Transform3D(4.6427e-16, 1.06213e-08, 0.242986, 0.242986, -1.06213e-08, 0, 1.06213e-08, 0.242987, -1.06213e-08, -3.2, 0, 0.483521)
+material_override = ExtResource("10_d6aoq")
+radial_segments = 24
+rings = 12
+
+[node name="Pip_On" type="CSGSphere3D" parent="ScorePips/Left/Pip_4"]
+transform = Transform3D(4.6427e-16, 1.06213e-08, 0.242986, 0.242986, -1.06213e-08, 0, 1.06213e-08, 0.242987, -1.06213e-08, -3.2, 0, 0.483521)
+material_override = ExtResource("9_qq0bc")
+radial_segments = 24
+rings = 12
+
+[node name="Pip_5" type="Node3D" parent="ScorePips/Left"]
+transform = Transform3D(0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Pip_Off" type="CSGSphere3D" parent="ScorePips/Left/Pip_5"]
+transform = Transform3D(4.6427e-16, 1.06213e-08, 0.242986, 0.242986, -1.06213e-08, 0, 1.06213e-08, 0.242987, -1.06213e-08, -3.2, 0, 0.483521)
+material_override = ExtResource("10_d6aoq")
+radial_segments = 24
+rings = 12
+
+[node name="Pip_On" type="CSGSphere3D" parent="ScorePips/Left/Pip_5"]
+transform = Transform3D(4.6427e-16, 1.06213e-08, 0.242986, 0.242986, -1.06213e-08, 0, 1.06213e-08, 0.242987, -1.06213e-08, -3.2, 0, 0.483521)
+material_override = ExtResource("9_qq0bc")
+radial_segments = 24
+rings = 12
+
+[node name="Pip_6" type="Node3D" parent="ScorePips/Left"]
+transform = Transform3D(0.809017, 0.587785, 0, -0.587785, 0.809017, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Pip_Off" type="CSGSphere3D" parent="ScorePips/Left/Pip_6"]
+transform = Transform3D(4.6427e-16, 1.06213e-08, 0.242986, 0.242986, -1.06213e-08, 0, 1.06213e-08, 0.242987, -1.06213e-08, -3.2, 0, 0.483521)
+material_override = ExtResource("10_d6aoq")
+radial_segments = 24
+rings = 12
+
+[node name="Pip_On" type="CSGSphere3D" parent="ScorePips/Left/Pip_6"]
+transform = Transform3D(4.6427e-16, 1.06213e-08, 0.242986, 0.242986, -1.06213e-08, 0, 1.06213e-08, 0.242987, -1.06213e-08, -3.2, 0, 0.483521)
+material_override = ExtResource("9_qq0bc")
+radial_segments = 24
+rings = 12
+
+[node name="Right" type="Node3D" parent="ScorePips"]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.738067, 0)
+
+[node name="Pip_0" type="Node3D" parent="ScorePips/Right"]
+
+[node name="Pip_Off" type="CSGSphere3D" parent="ScorePips/Right/Pip_0"]
+transform = Transform3D(4.6427e-16, 1.06213e-08, 0.242986, 0.242986, -1.06213e-08, 0, 1.06213e-08, 0.242987, -1.06213e-08, -3.2, 0, 0.483521)
+material_override = ExtResource("10_d6aoq")
+radial_segments = 24
+rings = 12
+
+[node name="Pip_On" type="CSGSphere3D" parent="ScorePips/Right/Pip_0"]
+transform = Transform3D(4.6427e-16, 1.06213e-08, 0.242986, 0.242986, -1.06213e-08, 0, 1.06213e-08, 0.242987, -1.06213e-08, -3.2, 0, 0.483521)
+material_override = ExtResource("11_ccta2")
+radial_segments = 24
+rings = 12
+
+[node name="Pip_1" type="Node3D" parent="ScorePips/Right"]
+transform = Transform3D(0.994522, 0.104528, 0, -0.104528, 0.994522, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Pip_Off" type="CSGSphere3D" parent="ScorePips/Right/Pip_1"]
+transform = Transform3D(4.6427e-16, 1.06213e-08, 0.242986, 0.242986, -1.06213e-08, 0, 1.06213e-08, 0.242987, -1.06213e-08, -3.2, 0, 0.483521)
+material_override = ExtResource("10_d6aoq")
+radial_segments = 24
+rings = 12
+
+[node name="Pip_On" type="CSGSphere3D" parent="ScorePips/Right/Pip_1"]
+transform = Transform3D(4.6427e-16, 1.06213e-08, 0.242986, 0.242986, -1.06213e-08, 0, 1.06213e-08, 0.242987, -1.06213e-08, -3.2, 0, 0.483521)
+material_override = ExtResource("11_ccta2")
+radial_segments = 24
+rings = 12
+
+[node name="Pip_2" type="Node3D" parent="ScorePips/Right"]
+transform = Transform3D(0.978148, 0.207912, 0, -0.207912, 0.978148, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Pip_Off" type="CSGSphere3D" parent="ScorePips/Right/Pip_2"]
+transform = Transform3D(4.6427e-16, 1.06213e-08, 0.242986, 0.242986, -1.06213e-08, 0, 1.06213e-08, 0.242987, -1.06213e-08, -3.2, 0, 0.483521)
+material_override = ExtResource("10_d6aoq")
+radial_segments = 24
+rings = 12
+
+[node name="Pip_On" type="CSGSphere3D" parent="ScorePips/Right/Pip_2"]
+transform = Transform3D(4.6427e-16, 1.06213e-08, 0.242986, 0.242986, -1.06213e-08, 0, 1.06213e-08, 0.242987, -1.06213e-08, -3.2, 0, 0.483521)
+material_override = ExtResource("11_ccta2")
+radial_segments = 24
+rings = 12
+
+[node name="Pip_3" type="Node3D" parent="ScorePips/Right"]
+transform = Transform3D(0.951056, 0.309017, 0, -0.309017, 0.951056, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Pip_Off" type="CSGSphere3D" parent="ScorePips/Right/Pip_3"]
+transform = Transform3D(4.6427e-16, 1.06213e-08, 0.242986, 0.242986, -1.06213e-08, 0, 1.06213e-08, 0.242987, -1.06213e-08, -3.2, 0, 0.483521)
+material_override = ExtResource("10_d6aoq")
+radial_segments = 24
+rings = 12
+
+[node name="Pip_On" type="CSGSphere3D" parent="ScorePips/Right/Pip_3"]
+transform = Transform3D(4.6427e-16, 1.06213e-08, 0.242986, 0.242986, -1.06213e-08, 0, 1.06213e-08, 0.242987, -1.06213e-08, -3.2, 0, 0.483521)
+material_override = ExtResource("11_ccta2")
+radial_segments = 24
+rings = 12
+
+[node name="Pip_4" type="Node3D" parent="ScorePips/Right"]
+transform = Transform3D(0.913545, 0.406737, 0, -0.406737, 0.913545, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Pip_Off" type="CSGSphere3D" parent="ScorePips/Right/Pip_4"]
+transform = Transform3D(4.6427e-16, 1.06213e-08, 0.242986, 0.242986, -1.06213e-08, 0, 1.06213e-08, 0.242987, -1.06213e-08, -3.2, 0, 0.483521)
+material_override = ExtResource("10_d6aoq")
+radial_segments = 24
+rings = 12
+
+[node name="Pip_On" type="CSGSphere3D" parent="ScorePips/Right/Pip_4"]
+transform = Transform3D(4.6427e-16, 1.06213e-08, 0.242986, 0.242986, -1.06213e-08, 0, 1.06213e-08, 0.242987, -1.06213e-08, -3.2, 0, 0.483521)
+material_override = ExtResource("11_ccta2")
+radial_segments = 24
+rings = 12
+
+[node name="Pip_5" type="Node3D" parent="ScorePips/Right"]
+transform = Transform3D(0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Pip_Off" type="CSGSphere3D" parent="ScorePips/Right/Pip_5"]
+transform = Transform3D(4.6427e-16, 1.06213e-08, 0.242986, 0.242986, -1.06213e-08, 0, 1.06213e-08, 0.242987, -1.06213e-08, -3.2, 0, 0.483521)
+material_override = ExtResource("10_d6aoq")
+radial_segments = 24
+rings = 12
+
+[node name="Pip_On" type="CSGSphere3D" parent="ScorePips/Right/Pip_5"]
+transform = Transform3D(4.6427e-16, 1.06213e-08, 0.242986, 0.242986, -1.06213e-08, 0, 1.06213e-08, 0.242987, -1.06213e-08, -3.2, 0, 0.483521)
+material_override = ExtResource("11_ccta2")
+radial_segments = 24
+rings = 12
+
+[node name="Pip_6" type="Node3D" parent="ScorePips/Right"]
+transform = Transform3D(0.809017, 0.587785, 0, -0.587785, 0.809017, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Pip_Off" type="CSGSphere3D" parent="ScorePips/Right/Pip_6"]
+transform = Transform3D(4.6427e-16, 1.06213e-08, 0.242986, 0.242986, -1.06213e-08, 0, 1.06213e-08, 0.242987, -1.06213e-08, -3.2, 0, 0.483521)
+material_override = ExtResource("10_d6aoq")
+radial_segments = 24
+rings = 12
+
+[node name="Pip_On" type="CSGSphere3D" parent="ScorePips/Right/Pip_6"]
+transform = Transform3D(4.6427e-16, 1.06213e-08, 0.242986, 0.242986, -1.06213e-08, 0, 1.06213e-08, 0.242987, -1.06213e-08, -3.2, 0, 0.483521)
+material_override = ExtResource("11_ccta2")
+radial_segments = 24
+rings = 12
+
+[node name="AudioStreamPlayer" type="Node" parent="."]
+script = ExtResource("12_ccta2")
+
+[node name="3DUI" type="Node3D" parent="."]
+visible = false
+
+[node name="Border1" type="Sprite3D" parent="3DUI"]
+transform = Transform3D(0.4006, 0, 0, 0, 0.4006, 0, 0, 0, 0.4006, 0, 1.5789, 2.60651)
+texture = ExtResource("2_mudpm")
+
+[node name="Gameport" type="SubViewport" parent="."]
+size = Vector2i(2560, 1440)
+
+[node name="Camera3D" type="Camera3D" parent="Gameport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.563, 8.829)
+projection = 1
+size = 5.871
+
+[node name="HeadCam_1" type="SubViewport" parent="."]
+
+[node name="HeadCam" type="Node3D" parent="HeadCam_1" node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.32887, 0.356825, 0.900635)
+script = ExtResource("21_mrve1")
+target = NodePath("../../Guy1/Torso/Head/Head_Target")
+
+[node name="Camera3D" type="Camera3D" parent="HeadCam_1/HeadCam"]
+projection = 1
+size = 0.415
+
+[node name="HeadCam_2" type="SubViewport" parent="."]
+
+[node name="HeadCam" type="Node3D" parent="HeadCam_2" node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.37193, 0.356825, 0.900635)
+script = ExtResource("21_mrve1")
+target = NodePath("../../Guy2/Torso/Head/Head_Target")
+
+[node name="Camera3D" type="Camera3D" parent="HeadCam_2/HeadCam"]
+projection = 1
+size = 0.415
+
+[editable path="Guy1"]
+[editable path="Guy2"]

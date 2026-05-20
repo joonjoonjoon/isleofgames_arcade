@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://bu7cvqjrvhlpd"]
+
+[node name="Game" type="Node2D"]
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+position = Vector2(-1.66103e-06, -18)
+rotation = -3.14159
+node_a = NodePath("../Bone_1")
+node_b = NodePath("../Bone_2")
+angular_limit_enabled = true
+angular_limit_lower = -0.174533
+angular_limit_upper = 0.174533
+
+[node name="PinJoint2D2" type="PinJoint2D" parent="."]
+position = Vector2(-17, -58)
+rotation = -3.14159
+node_a = NodePath("../Bone_2")
+node_b = NodePath("../Bone_3")
+angular_limit_enabled = true
+angular_limit_lower = -0.174533
+angular_limit_upper = 0.174533
+
+[node name="Bone_1" type="RigidBody2D" parent="."]
+rotation = 3.14159
+freeze = true
+freeze_mode = 1
+
+[node name="Polygon2D" type="Polygon2D" parent="Bone_1"]
+color = Color(0.741176, 0.639216, 1, 1)
+polygon = PackedVector2Array(-15, 20, -17, -25, 15, -26, 15, 25)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bone_1"]
+polygon = PackedVector2Array(-15, 20, -17, -25, 15, -26, 15, 25)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Bone_2" type="RigidBody2D" parent="."]
+position = Vector2(-9, -38)
+rotation = 3.14159
+
+[node name="Polygon2D" type="Polygon2D" parent="Bone_2"]
+color = Color(1, 0.603922, 1, 1)
+polygon = PackedVector2Array(-15, 20, -17, -25, 15, -26, 15, 25)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bone_2"]
+polygon = PackedVector2Array(-15, 20, -17, -25, 15, -26, 15, 25)
+
+[node name="Bone_3" type="RigidBody2D" parent="."]
+position = Vector2(-27, -78)
+rotation = 3.14159
+
+[node name="Polygon2D" type="Polygon2D" parent="Bone_3"]
+color = Color(1, 0.603922, 0.745098, 1)
+polygon = PackedVector2Array(-15, 20, -17, -25, 15, -26, 15, 25)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bone_3"]
+polygon = PackedVector2Array(-15, 20, -17, -25, 15, -26, 15, 25)

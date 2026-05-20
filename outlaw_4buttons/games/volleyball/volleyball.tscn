@@ -1,0 +1,149 @@
+[gd_scene load_steps=10 format=3 uid="uid://bjavef0qjokd6"]
+
+[ext_resource type="Script" uid="uid://d4k0fnixu6n0b" path="res://games/volleyball/scripts/debug_draw.gd" id="1_h83qq"]
+[ext_resource type="Script" uid="uid://k7vdkyl8uunx" path="res://games/volleyball/scripts/game_manager.gd" id="1_pdrv3"]
+[ext_resource type="PackedScene" uid="uid://cxx4lscnkkhtu" path="res://games/volleyball/subscenes/guy.tscn" id="2_grg88"]
+[ext_resource type="Material" uid="uid://7h1wwk3qtkrb" path="res://games/volleyball/materials/ground.tres" id="6_xkc7x"]
+[ext_resource type="Material" uid="uid://pww52d1ix0av" path="res://games/volleyball/materials/ball.tres" id="7_tiso8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_pdrv3"]
+font_size = 64
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ggjlk"]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xvx2k"]
+radius = 0.2
+
+[sub_resource type="SphereMesh" id="SphereMesh_wtvov"]
+radius = 0.2
+height = 0.4
+
+[node name="Joints3D" type="Node3D"]
+script = ExtResource("1_pdrv3")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScoreLabel_0" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -110.0
+offset_top = 89.0
+offset_right = 110.0
+offset_bottom = 177.0
+grow_horizontal = 2
+text = "LOBSTERS
+SCORE!"
+label_settings = SubResource("LabelSettings_pdrv3")
+horizontal_alignment = 1
+
+[node name="ScoreLabel_1" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -110.0
+offset_top = 89.0
+offset_right = 110.0
+offset_bottom = 177.0
+grow_horizontal = 2
+text = "PIGEONS
+SCORE!"
+label_settings = SubResource("LabelSettings_pdrv3")
+horizontal_alignment = 1
+
+[node name="Node2D" type="Node2D" parent="."]
+script = ExtResource("1_h83qq")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.22376, 0.900479)
+projection = 1
+size = 7.307
+
+[node name="Guy1" parent="." instance=ExtResource("2_grg88")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6096, 0, 0)
+
+[node name="Guy2" parent="." instance=ExtResource("2_grg88")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.13554, 0, 0)
+key = 70
+
+[node name="Guy3" parent="." instance=ExtResource("2_grg88")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.99567, 0, 0)
+key = 74
+
+[node name="Guy4" parent="." instance=ExtResource("2_grg88")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.67375, 0, 0)
+key = 75
+
+[node name="Ground_Left" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.45434, -1.46819, 0)
+use_collision = true
+size = Vector3(6.88622, 1.15872, 1)
+material = ExtResource("6_xkc7x")
+
+[node name="Ground_Right" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.454, -1.468, 0)
+use_collision = true
+size = Vector3(6.88622, 1.15872, 1)
+material = ExtResource("6_xkc7x")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.603085, 0)
+use_collision = true
+size = Vector3(0.134766, 2.88893, 1)
+material = ExtResource("6_xkc7x")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.14048, 0)
+use_collision = true
+size = Vector3(13.7949, 1.15872, 1)
+material = ExtResource("6_xkc7x")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.465197, 0.885207, 0, -0.885207, -0.465197, 0, 0, 0, 1, -5.68027, 2.96595, 0)
+use_collision = true
+size = Vector3(13.7949, 4.85768, 1)
+material = ExtResource("6_xkc7x")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.464842, -0.885394, 0, 0.885394, -0.464842, 0, 0, 0, 1, 5.68, 2.601, 0)
+use_collision = true
+size = Vector3(13.7949, 4.85768, 1)
+material = ExtResource("6_xkc7x")
+
+[node name="Ball" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.62146, 2.37779, 0)
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+mass = 4.0
+physics_material_override = SubResource("PhysicsMaterial_ggjlk")
+gravity_scale = 0.25
+can_sleep = false
+contact_monitor = true
+max_contacts_reported = 3
+linear_damp = 0.25
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ball"]
+shape = SubResource("SphereShape3D_xvx2k")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ball"]
+material_override = ExtResource("7_tiso8")
+mesh = SubResource("SphereMesh_wtvov")
+
+[node name="BallSpawn_Left" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.62146, 2.37779, 0)
+
+[node name="BallSpawn_Right" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.621, 2.378, 0)

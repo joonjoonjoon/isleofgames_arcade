@@ -1,0 +1,212 @@
+[gd_scene load_steps=16 format=3 uid="uid://cxx4lscnkkhtu"]
+
+[ext_resource type="Script" uid="uid://1ibtflrtlwa5" path="res://scripts/guy.gd" id="1_y3528"]
+[ext_resource type="Texture2D" uid="uid://crk1p7op7u7kh" path="res://sprites/Group 225.png" id="2_4yvcp"]
+[ext_resource type="Material" uid="uid://w7idaulwdit" path="res://materials/bone_1.tres" id="3_mijxw"]
+[ext_resource type="Material" uid="uid://b7l544vdoy3ir" path="res://materials/bone.tres" id="4_jm3tn"]
+[ext_resource type="Script" uid="uid://daoyu1d7s8e8o" path="res://scripts/target_hinge.gd" id="5_olm3u"]
+[ext_resource type="Texture2D" uid="uid://6j1pnh7547yo" path="res://sprites/Group 224.png" id="6_ohark"]
+[ext_resource type="Texture2D" uid="uid://bpb3uh8jbg35a" path="res://sprites/Group 222.png" id="7_42gw6"]
+[ext_resource type="Texture2D" uid="uid://dj7cvckf6rhql" path="res://sprites/Group 223.png" id="8_rkydi"]
+[ext_resource type="Texture2D" uid="uid://b1bsrp438c5vu" path="res://sprites/Group 220.png" id="9_yqp2n"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dnwnl"]
+size = Vector3(0.306396, 0.5, 0.1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_2o5u6"]
+size = Vector2(0.5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_egys8"]
+size = Vector3(0.109375, 0.256832, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h83qq"]
+size = Vector3(0.109375, 0.558464, 0.1)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_h83qq"]
+friction = 0.5
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_egys8"]
+friction = 0.5
+
+[node name="Guy" type="Node3D"]
+script = ExtResource("1_y3528")
+key = 68
+
+[node name="Torso" type="RigidBody3D" parent="."]
+physics_interpolation_mode = 1
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+freeze_mode = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Torso"]
+shape = SubResource("BoxShape3D_dnwnl")
+
+[node name="Sprite3D" type="Sprite3D" parent="Torso"]
+transform = Transform3D(0.034018, 0, 0, 0, 0.034018, 0, 0, 0, 0.034018, 0, 0, 0)
+texture = ExtResource("2_4yvcp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Torso"]
+transform = Transform3D(0.617976, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+visible = false
+material_override = ExtResource("3_mijxw")
+mesh = SubResource("QuadMesh_2o5u6")
+
+[node name="Head" type="RigidBody3D" parent="Torso"]
+transform = Transform3D(0.999965, -0.00839496, 0, 0.00839496, 0.999965, 0, 0, 0, 1, 0.00344253, 0.240489, 0)
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+freeze_mode = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Torso/Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.76837e-07, 0.100893, 0)
+shape = SubResource("BoxShape3D_egys8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Torso/Head"]
+transform = Transform3D(0.212175, 0, 0, 0, 0.512246, 0, 0, 0, 1, -3.95208e-10, 0.100401, 0)
+visible = false
+material_override = ExtResource("4_jm3tn")
+mesh = SubResource("QuadMesh_2o5u6")
+
+[node name="TargetHinge" type="HingeJoint3D" parent="Torso/Head"]
+node_a = NodePath("..")
+node_b = NodePath("../..")
+script = ExtResource("5_olm3u")
+min_angle = -60.0
+max_angle = 60.0
+max_impulse = 0.2
+no_slack = true
+
+[node name="Sprite3D" type="Sprite3D" parent="Torso/Head"]
+transform = Transform3D(0.034, 0, 0, 0, 0.034, 0, 0, 0, 0.034, -0.0418319, 0.131301, 0)
+sorting_offset = 1.0
+texture = ExtResource("6_ohark")
+
+[node name="Arm_Right" type="RigidBody3D" parent="Torso"]
+transform = Transform3D(0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0, 1, 0.126064, 0.185348, 0)
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+freeze_mode = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Torso/Arm_Right"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.34465e-07, 0.241188, 0)
+shape = SubResource("BoxShape3D_h83qq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Torso/Arm_Right"]
+transform = Transform3D(0.212175, 0, 0, 0, 0.986456, 0, 0, 0, 1, 1.97604e-09, 0.239467, 0)
+visible = false
+material_override = ExtResource("4_jm3tn")
+mesh = SubResource("QuadMesh_2o5u6")
+
+[node name="TargetHinge" type="HingeJoint3D" parent="Torso/Arm_Right"]
+node_a = NodePath("..")
+node_b = NodePath("../..")
+script = ExtResource("5_olm3u")
+min_angle = -70.0
+max_angle = 70.0
+no_slack = true
+
+[node name="Sprite3D" type="Sprite3D" parent="Torso/Arm_Right"]
+transform = Transform3D(-0.0334619, 0.00602498, 0, -0.00602498, -0.0334619, 0, 0, 0, 0.034, 0.0156673, 0.235624, 0)
+sorting_offset = 1.0
+flip_h = true
+texture = ExtResource("7_42gw6")
+
+[node name="Arm_Left" type="RigidBody3D" parent="Torso"]
+transform = Transform3D(0.971706, -0.236194, 0, 0.236194, 0.971706, 0, 0, 0, 1, -0.110105, 0.198348, 0)
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+freeze_mode = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Torso/Arm_Left"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.74975e-07, 0.233096, 0)
+shape = SubResource("BoxShape3D_h83qq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Torso/Arm_Left"]
+transform = Transform3D(0.212175, 0, 0, 0, 0.986456, 0, 0, 0, 1, 1.97604e-09, 0.239467, 0)
+visible = false
+material_override = ExtResource("4_jm3tn")
+mesh = SubResource("QuadMesh_2o5u6")
+
+[node name="TargetHinge" type="HingeJoint3D" parent="Torso/Arm_Left"]
+node_a = NodePath("..")
+node_b = NodePath("../..")
+script = ExtResource("5_olm3u")
+min_angle = -70.0
+max_angle = 70.0
+no_slack = true
+
+[node name="Sprite3D" type="Sprite3D" parent="Torso/Arm_Left"]
+transform = Transform3D(-0.0335886, -0.00527304, 0, 0.00527304, -0.0335886, 0, 0, 0, 0.034, -0.0311451, 0.229934, 0)
+sorting_offset = 1.0
+flip_h = true
+texture = ExtResource("8_rkydi")
+
+[node name="Leg_Right" type="RigidBody3D" parent="Torso"]
+transform = Transform3D(-0.999017, 0.0443343, 0, -0.0443343, -0.999017, 0, 0, 0, 1, 0.11241, -0.218804, 0)
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+physics_material_override = SubResource("PhysicsMaterial_h83qq")
+freeze_mode = 1
+continuous_cd = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Torso/Leg_Right"]
+transform = Transform3D(1, -7.07805e-08, 0, 7.07805e-08, 1, 0, 0, 0, 1, 4.76837e-07, 0.256714, 0)
+shape = SubResource("BoxShape3D_h83qq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Torso/Leg_Right"]
+transform = Transform3D(0.212175, 0, 0, 0, 0.986456, 0, 0, 0, 1, -3.95208e-10, 0.233159, 0)
+visible = false
+material_override = ExtResource("4_jm3tn")
+mesh = SubResource("QuadMesh_2o5u6")
+
+[node name="TargetHinge" type="HingeJoint3D" parent="Torso/Leg_Right"]
+node_a = NodePath("..")
+node_b = NodePath("../..")
+script = ExtResource("5_olm3u")
+min_angle = -90.0
+max_angle = 90.0
+max_impulse = 2.0
+no_slack = true
+
+[node name="Sprite3D" type="Sprite3D" parent="Torso/Leg_Right"]
+transform = Transform3D(-0.03398, -0.00116463, 0, 0.00116463, -0.03398, 0, 0, 0, 0.034, 0.0352477, 0.216462, 0)
+sorting_offset = 1.0
+texture = ExtResource("9_yqp2n")
+
+[node name="Leg_Left" type="RigidBody3D" parent="Torso"]
+transform = Transform3D(-0.99995, -0.0100006, 0, 0.0100006, -0.99995, 0, 0, 0, 1, -0.112, -0.219, 0)
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+physics_material_override = SubResource("PhysicsMaterial_egys8")
+freeze_mode = 1
+continuous_cd = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Torso/Leg_Left"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.257, 0)
+shape = SubResource("BoxShape3D_h83qq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Torso/Leg_Left"]
+transform = Transform3D(0.212175, 0, 0, 0, 0.986456, 0, 0, 0, 1, -5.92811e-10, 0.233009, 0)
+visible = false
+material_override = ExtResource("4_jm3tn")
+mesh = SubResource("QuadMesh_2o5u6")
+
+[node name="TargetHinge" type="HingeJoint3D" parent="Torso/Leg_Left"]
+node_a = NodePath("..")
+node_b = NodePath("../..")
+script = ExtResource("5_olm3u")
+min_angle = -90.0
+max_angle = 90.0
+max_impulse = 2.0
+no_slack = true
+
+[node name="Sprite3D" type="Sprite3D" parent="Torso/Leg_Left"]
+transform = Transform3D(-0.0339997, -0.000134112, 0, 0.000134112, -0.0339997, 0, 0, 0, 0.034, 0.0151478, 0.217463, 0)
+sorting_offset = 1.0
+texture = ExtResource("9_yqp2n")

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b7avp8a23lh8o"
+path="res://.godot/imported/Sound 85.wav-4a8f2bee4aa6ed4ca8801a267dff7ad5.sample"
+
+[deps]
+
+source_file="res://games/volleyball/audio/unused/Sound 85.wav"
+dest_files=["res://.godot/imported/Sound 85.wav-4a8f2bee4aa6ed4ca8801a267dff7ad5.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
