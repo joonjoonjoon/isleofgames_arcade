@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://j6ru6x0vba6i"
+path="res://.godot/imported/Sound 09.wav-5f296ccf02085dd997e9a9762bb60498.sample"
+
+[deps]
+
+source_file="res://games/fencing/audio/hurt/Sound 09.wav"
+dest_files=["res://.godot/imported/Sound 09.wav-5f296ccf02085dd997e9a9762bb60498.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

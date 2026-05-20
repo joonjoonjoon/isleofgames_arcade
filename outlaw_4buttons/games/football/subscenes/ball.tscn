@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://cmv1yi0lkfmck"]
+
+[ext_resource type="Script" uid="uid://vf854p8und6x" path="res://scripts/shape_entity.gd" id="1_7ul0c"]
+[ext_resource type="Script" uid="uid://er0yujxhdbnm" path="res://scripts/circle.gd" id="2_jxek5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_707m3"]
+radius = 20.0
+
+[node name="Ball" type="RigidBody2D"]
+gravity_scale = 0.0
+
+[node name="ShapeEntity" type="Node2D" parent="."]
+script = ExtResource("1_7ul0c")
+size = 40.0
+keep_rotation = true
+metadata/_custom_type_script = "uid://vf854p8und6x"
+
+[node name="Shadow" type="Node2D" parent="ShapeEntity"]
+position = Vector2(0, 5)
+script = ExtResource("2_jxek5")
+radius = 20.0
+fill_color = Color(0, 0, 0, 0.5)
+outline_width = 0.0
+
+[node name="FillBG" type="Node2D" parent="ShapeEntity"]
+script = ExtResource("2_jxek5")
+radius = 20.0
+outline_width = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_707m3")

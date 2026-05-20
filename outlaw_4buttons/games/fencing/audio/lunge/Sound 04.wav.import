@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bjp5e72oiciih"
+path="res://.godot/imported/Sound 04.wav-b83b3d65c0fdf1747de7e51cd2fe4d23.sample"
+
+[deps]
+
+source_file="res://games/fencing/audio/lunge/Sound 04.wav"
+dest_files=["res://.godot/imported/Sound 04.wav-b83b3d65c0fdf1747de7e51cd2fe4d23.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

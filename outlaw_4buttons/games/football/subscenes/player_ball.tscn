@@ -1,0 +1,88 @@
+[gd_scene load_steps=12 format=3 uid="uid://cncyhao8v0tbm"]
+
+[ext_resource type="Script" uid="uid://bmlqscoktv4jq" path="res://scripts/player_ball.gd" id="1_cf1s2"]
+[ext_resource type="Script" uid="uid://vf854p8und6x" path="res://scripts/shape_entity.gd" id="2_hqcul"]
+[ext_resource type="Script" uid="uid://er0yujxhdbnm" path="res://scripts/circle.gd" id="3_4b615"]
+[ext_resource type="Texture2D" uid="uid://belkoycp4iuo5" path="res://sprites/AimArrow.png" id="4_j2ln7"]
+[ext_resource type="Texture2D" uid="uid://ylsyuaauajwa" path="res://sprites/AimArrowMask.png" id="5_18nmk"]
+[ext_resource type="Texture2D" uid="uid://cmsm74b15fcb4" path="res://sprites/AimArrowFill.png" id="6_s73fn"]
+[ext_resource type="Texture2D" uid="uid://d0p1t7a00u35a" path="res://sprites/GrowArrow/Mask.png" id="7_ccly4"]
+[ext_resource type="Texture2D" uid="uid://cfdqoyrhvrs8m" path="res://sprites/GrowArrow/Arrow.png" id="8_q73nf"]
+[ext_resource type="Texture2D" uid="uid://ck68n88nx2nci" path="res://sprites/GrowArrow/Base.png" id="9_upqke"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6yy4g"]
+bounce = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_707m3"]
+radius = 30.0
+
+[node name="PlayerBall" type="RigidBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_6yy4g")
+gravity_scale = 0.0
+linear_damp = 2.0
+angular_damp = 0.5
+script = ExtResource("1_cf1s2")
+shoot_key = 70
+
+[node name="ShapeEntity" type="Node2D" parent="."]
+script = ExtResource("2_hqcul")
+size = 60.0
+color = Color(0.805255, 0.000109858, 0.114984, 1)
+keep_rotation = true
+metadata/_custom_type_script = "uid://vf854p8und6x"
+
+[node name="Shadow" type="Node2D" parent="ShapeEntity"]
+position = Vector2(0, 7.5)
+script = ExtResource("3_4b615")
+radius = 30.0
+fill_color = Color(0, 0, 0, 0.5)
+outline_width = 0.0
+
+[node name="FillBG" type="Node2D" parent="ShapeEntity"]
+script = ExtResource("3_4b615")
+radius = 30.0
+fill_color = Color(0.805255, 0.000109858, 0.114984, 1)
+outline_width = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_707m3")
+
+[node name="Aimer" type="Node2D" parent="."]
+z_index = 10
+
+[node name="Arrow" type="Sprite2D" parent="Aimer"]
+visible = false
+position = Vector2(44, 7.73071e-12)
+rotation = 3.14159
+scale = Vector2(0.874606, 0.874606)
+texture = ExtResource("4_j2ln7")
+
+[node name="Mask" type="Sprite2D" parent="Aimer"]
+visible = false
+clip_children = 1
+position = Vector2(44, 7.73071e-12)
+rotation = 3.14159
+scale = Vector2(0.874606, 0.874606)
+texture = ExtResource("5_18nmk")
+
+[node name="Fill" type="Sprite2D" parent="Aimer/Mask"]
+modulate = Color(0.42813, 0.67, 0.2881, 1)
+position = Vector2(27, 0)
+texture = ExtResource("6_s73fn")
+offset = Vector2(-27, 0)
+
+[node name="GrowArrow" type="Node2D" parent="Aimer"]
+rotation = 3.14159
+
+[node name="Mask" type="Sprite2D" parent="Aimer/GrowArrow"]
+clip_children = 1
+position = Vector2(-79, -9.53752e-05)
+texture = ExtResource("7_ccly4")
+
+[node name="Arrow" type="Sprite2D" parent="Aimer/GrowArrow/Mask"]
+texture = ExtResource("8_q73nf")
+offset = Vector2(66, 0)
+
+[node name="Base" type="Sprite2D" parent="Aimer/GrowArrow"]
+position = Vector2(-36.5, -4.27047e-05)
+texture = ExtResource("9_upqke")

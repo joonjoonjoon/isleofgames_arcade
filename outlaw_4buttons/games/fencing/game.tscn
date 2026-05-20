@@ -1,0 +1,327 @@
+[gd_scene load_steps=11 format=3 uid="uid://bqsdaq5b85gwu"]
+
+[ext_resource type="Script" uid="uid://bnf4yi187h8hq" path="res://games/fencing/scripts/game_manager_fencing.gd" id="1_e2o6t"]
+[ext_resource type="PackedScene" uid="uid://c353f3vrxmqf6" path="res://games/fencing/subscenes/fencer.tscn" id="2_e2o6t"]
+[ext_resource type="Material" uid="uid://dsj680sdtoou3" path="res://games/fencing/materials/parry_particles.tres" id="3_feb5d"]
+[ext_resource type="Script" uid="uid://bhu30s46uu6q6" path="res://games/fencing/scripts/audio_manager_fencing.gd" id="4_fc0e3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_e2o6t"]
+font_size = 136
+
+[sub_resource type="Environment" id="Environment_mwb40"]
+ambient_light_source = 2
+ambient_light_color = Color(0.404511, 0.404511, 0.404511, 1)
+glow_intensity = 1.32
+glow_strength = 1.11
+glow_bloom = 0.2
+
+[sub_resource type="Curve" id="Curve_feb5d"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_fc0e3"]
+curve = SubResource("Curve_feb5d")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ryrav"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 29.35
+initial_velocity_max = 61.96
+gravity = Vector3(0, 0, 0)
+damping_min = 1000.0
+damping_max = 1000.0
+scale_min = 0.01
+scale_max = 0.1
+alpha_curve = SubResource("CurveTexture_fc0e3")
+
+[sub_resource type="QuadMesh" id="QuadMesh_eow3j"]
+
+[node name="Game" type="Node3D"]
+script = ExtResource("1_e2o6t")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -208.0
+offset_top = 61.0
+offset_right = 208.0
+offset_bottom = 247.0
+grow_horizontal = 2
+text = "POINT"
+label_settings = SubResource("LabelSettings_e2o6t")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScorePanel" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_top = -130.0
+offset_bottom = -130.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ColorRect" type="ColorRect" parent="UI/ScorePanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -480.0
+offset_top = -127.0
+offset_right = 480.0
+offset_bottom = 127.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(480, 127)
+color = Color(0.51, 0.51, 0.51, 1)
+
+[node name="Middle" type="ColorRect" parent="UI/ScorePanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = -87.0
+offset_right = 5.0
+offset_bottom = 87.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 1)
+
+[node name="Fill" type="ColorRect" parent="UI/ScorePanel/Middle"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = -174.0
+offset_right = 5.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Right0" type="ColorRect" parent="UI/ScorePanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = -66.0
+offset_right = 92.0
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 1)
+
+[node name="Fill" type="ColorRect" parent="UI/ScorePanel/Right0"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -122.0
+offset_right = 40.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Right1" type="ColorRect" parent="UI/ScorePanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = -66.0
+offset_right = 180.0
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 1)
+
+[node name="Fill" type="ColorRect" parent="UI/ScorePanel/Right1"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -122.0
+offset_right = 40.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Right2" type="ColorRect" parent="UI/ScorePanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 188.0
+offset_top = -66.0
+offset_right = 268.0
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 1)
+
+[node name="Fill" type="ColorRect" parent="UI/ScorePanel/Right2"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -122.0
+offset_right = 40.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Left0" type="ColorRect" parent="UI/ScorePanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -92.0
+offset_top = -66.0
+offset_right = -12.0
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 1)
+
+[node name="Fill" type="ColorRect" parent="UI/ScorePanel/Left0"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -122.0
+offset_right = 40.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Left1" type="ColorRect" parent="UI/ScorePanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -180.0
+offset_top = -66.0
+offset_right = -100.0
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 1)
+
+[node name="Fill" type="ColorRect" parent="UI/ScorePanel/Left1"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -122.0
+offset_right = 40.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Left2" type="ColorRect" parent="UI/ScorePanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -268.0
+offset_top = -66.0
+offset_right = -188.0
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 1)
+
+[node name="Fill" type="ColorRect" parent="UI/ScorePanel/Left2"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -122.0
+offset_right = 40.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mwb40")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49004, 7.87632)
+fov = 41.6
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+size = Vector3(15.585, 2, 1)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+
+[node name="Fencer_0" parent="." instance=ExtResource("2_e2o6t")]
+transform = Transform3D(4.37114e-08, 0, 1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 0, 0)
+
+[node name="Fencer_1" parent="." instance=ExtResource("2_e2o6t")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3, 0, 0)
+player_id = 1
+
+[node name="ParryFlash" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26966, 0)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="ParryFlash"]
+visible = false
+material_override = ExtResource("3_feb5d")
+emitting = false
+amount = 16
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_ryrav")
+draw_pass_1 = SubResource("QuadMesh_eow3j")
+
+[node name="AudioManager" type="Node" parent="."]
+script = ExtResource("4_fc0e3")
+metadata/_custom_type_script = "uid://bhu30s46uu6q6"

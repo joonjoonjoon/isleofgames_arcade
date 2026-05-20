@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://ck02rwfxoo5ti"]
+
+[ext_resource type="Script" uid="uid://er0yujxhdbnm" path="res://scripts/circle.gd" id="1_syndc"]
+[ext_resource type="Script" uid="uid://63fvpksakuj" path="res://scripts/square.gd" id="2_m1mfu"]
+
+[node name="Circle" type="Node2D"]
+
+[node name="Shadow" type="Node2D" parent="."]
+position = Vector2(0, 10)
+script = ExtResource("1_syndc")
+radius = 30.0
+fill_color = Color(0, 0, 0, 0.321569)
+outline_width = 0.0
+
+[node name="Circle1" type="Node2D" parent="."]
+script = ExtResource("1_syndc")
+radius = 30.0
+fill_color = Color(0.6, 0.0823529, 0.0823529, 1)
+
+[node name="Square" type="Node2D" parent="."]
+clip_children = 1
+position = Vector2(0, 30)
+script = ExtResource("2_m1mfu")
+origin = Vector2(0.5, 1)
+size = Vector2(60, 47.02)
+outline_width = 0.0
+metadata/_custom_type_script = "uid://63fvpksakuj"
+
+[node name="Fill" type="Node2D" parent="Square"]
+position = Vector2(0, -30)
+script = ExtResource("1_syndc")
+radius = 30.0
+fill_color = Color(0.878431, 0.235294, 0.196078, 1)

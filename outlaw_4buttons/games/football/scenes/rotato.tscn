@@ -1,0 +1,328 @@
+[gd_scene load_steps=11 format=3 uid="uid://dcfdclw0250jq"]
+
+[ext_resource type="Script" uid="uid://bn5fdnapelgyg" path="res://games/football/scripts/debug_draw_football.gd" id="1_707m3"]
+[ext_resource type="PackedScene" uid="uid://cmv1yi0lkfmck" path="res://games/football/subscenes/ball.tscn" id="1_i3nm5"]
+[ext_resource type="Script" uid="uid://8vylj8pc1cqg" path="res://games/football/scripts/rotato_manager.gd" id="1_k7in6"]
+[ext_resource type="PackedScene" uid="uid://cncyhao8v0tbm" path="res://games/football/subscenes/player_ball.tscn" id="4_i3nm5"]
+[ext_resource type="Script" uid="uid://63fvpksakuj" path="res://games/football/scripts/square.gd" id="5_h5wwd"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_h5wwd"]
+font_size = 46
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h5wwd"]
+size = Vector2(1198, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_707m3"]
+size = Vector2(100, 400)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k7in6"]
+size = Vector2(60, 176)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_k7in6"]
+bounce = 1.0
+
+[node name="Rotato" type="Node2D"]
+script = ExtResource("1_k7in6")
+
+[node name="Score_Label_Left" type="Label" parent="."]
+visible = false
+z_index = 100
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -229.5
+offset_top = -160.0
+offset_right = 229.5
+offset_bottom = -96.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "LEFT TEAM SCORES!!!"
+label_settings = SubResource("LabelSettings_h5wwd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score_Label_Right" type="Label" parent="."]
+visible = false
+z_index = 100
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -247.5
+offset_top = -160.0
+offset_right = 247.5
+offset_bottom = -96.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "RIGHT TEAM SCORES!!!"
+label_settings = SubResource("LabelSettings_h5wwd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StateLabel" type="Label" parent="."]
+z_index = 100
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -247.5
+offset_top = -160.0
+offset_right = 247.5
+offset_bottom = -96.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "RIGHT TEAM SCORES!!!"
+label_settings = SubResource("LabelSettings_h5wwd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DebugDraw" type="Node2D" parent="."]
+script = ExtResource("1_707m3")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Pitch" type="Node2D" parent="."]
+
+[node name="Square" type="Node2D" parent="Pitch"]
+script = ExtResource("5_h5wwd")
+size = Vector2(1000, 600)
+fill_color = Color(0.458824, 0.603922, 0.372549, 1)
+outline_color = Color(0, 0, 0, 0)
+metadata/_custom_type_script = "uid://63fvpksakuj"
+
+[node name="Wall_Bottom" type="StaticBody2D" parent="Pitch"]
+position = Vector2(0, 280)
+
+[node name="Square" type="Node2D" parent="Pitch/Wall_Bottom"]
+script = ExtResource("5_h5wwd")
+size = Vector2(1200, 100)
+fill_color = Color(0.34016, 0.48, 0.2592, 1)
+outline_color = Color(0, 0, 0, 0)
+metadata/_custom_type_script = "uid://63fvpksakuj"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pitch/Wall_Bottom"]
+shape = SubResource("RectangleShape2D_h5wwd")
+
+[node name="Wall_Top" type="StaticBody2D" parent="Pitch"]
+position = Vector2(0, -280)
+
+[node name="Square" type="Node2D" parent="Pitch/Wall_Top"]
+script = ExtResource("5_h5wwd")
+size = Vector2(1200, 100)
+fill_color = Color(0.34016, 0.48, 0.2592, 1)
+outline_color = Color(0, 0, 0, 0)
+metadata/_custom_type_script = "uid://63fvpksakuj"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pitch/Wall_Top"]
+shape = SubResource("RectangleShape2D_h5wwd")
+
+[node name="Wall_Right_Top" type="StaticBody2D" parent="Pitch"]
+position = Vector2(464.424, -287)
+
+[node name="Square" type="Node2D" parent="Pitch/Wall_Right_Top"]
+script = ExtResource("5_h5wwd")
+size = Vector2(100, 400)
+fill_color = Color(0.34016, 0.48, 0.2592, 1)
+outline_color = Color(0, 0, 0, 0)
+metadata/_custom_type_script = "uid://63fvpksakuj"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pitch/Wall_Right_Top"]
+shape = SubResource("RectangleShape2D_707m3")
+
+[node name="Wall_Right_Bottom" type="StaticBody2D" parent="Pitch"]
+position = Vector2(464.424, 287)
+
+[node name="Square" type="Node2D" parent="Pitch/Wall_Right_Bottom"]
+script = ExtResource("5_h5wwd")
+size = Vector2(100, 400)
+fill_color = Color(0.34016, 0.48, 0.2592, 1)
+outline_color = Color(0, 0, 0, 0)
+metadata/_custom_type_script = "uid://63fvpksakuj"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pitch/Wall_Right_Bottom"]
+shape = SubResource("RectangleShape2D_707m3")
+
+[node name="Wall_Right" type="StaticBody2D" parent="Pitch"]
+position = Vector2(541.424, 0)
+scale = Vector2(1, 1.17709)
+
+[node name="Square" type="Node2D" parent="Pitch/Wall_Right"]
+script = ExtResource("5_h5wwd")
+size = Vector2(100, 400)
+fill_color = Color(0.34016, 0.48, 0.2592, 1)
+outline_color = Color(0, 0, 0, 0)
+metadata/_custom_type_script = "uid://63fvpksakuj"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pitch/Wall_Right"]
+shape = SubResource("RectangleShape2D_707m3")
+
+[node name="Goal_Right" type="Area2D" parent="Pitch"]
+position = Vector2(414.424, 0)
+rotation = 3.14159
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pitch/Goal_Right"]
+position = Vector2(-49, 0)
+shape = SubResource("RectangleShape2D_k7in6")
+
+[node name="Wall_Left_Top" type="StaticBody2D" parent="Pitch"]
+position = Vector2(-469.03, -287)
+
+[node name="Square" type="Node2D" parent="Pitch/Wall_Left_Top"]
+script = ExtResource("5_h5wwd")
+size = Vector2(100, 400)
+fill_color = Color(0.34016, 0.48, 0.2592, 1)
+outline_color = Color(0, 0, 0, 0)
+metadata/_custom_type_script = "uid://63fvpksakuj"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pitch/Wall_Left_Top"]
+shape = SubResource("RectangleShape2D_707m3")
+
+[node name="Wall_Left" type="StaticBody2D" parent="Pitch"]
+position = Vector2(-546.03, 0)
+scale = Vector2(1, 1.17709)
+
+[node name="Square" type="Node2D" parent="Pitch/Wall_Left"]
+script = ExtResource("5_h5wwd")
+size = Vector2(100, 400)
+fill_color = Color(0.34016, 0.48, 0.2592, 1)
+outline_color = Color(0, 0, 0, 0)
+metadata/_custom_type_script = "uid://63fvpksakuj"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pitch/Wall_Left"]
+shape = SubResource("RectangleShape2D_707m3")
+
+[node name="Wall_Left_Bottom" type="StaticBody2D" parent="Pitch"]
+position = Vector2(-469.03, 287)
+
+[node name="Square" type="Node2D" parent="Pitch/Wall_Left_Bottom"]
+script = ExtResource("5_h5wwd")
+size = Vector2(100, 400)
+fill_color = Color(0.34016, 0.48, 0.2592, 1)
+outline_color = Color(0, 0, 0, 0)
+metadata/_custom_type_script = "uid://63fvpksakuj"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pitch/Wall_Left_Bottom"]
+shape = SubResource("RectangleShape2D_707m3")
+
+[node name="Goal_Left" type="Area2D" parent="Pitch"]
+position = Vector2(-419.03, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pitch/Goal_Left"]
+position = Vector2(-49, 0)
+shape = SubResource("RectangleShape2D_k7in6")
+
+[node name="Wall_Corner_Top_Left" type="StaticBody2D" parent="Pitch"]
+position = Vector2(-344.03, -298)
+rotation = 0.785397
+
+[node name="Square" type="Node2D" parent="Pitch/Wall_Corner_Top_Left"]
+script = ExtResource("5_h5wwd")
+size = Vector2(100, 400)
+fill_color = Color(0.34016, 0.48, 0.2592, 1)
+outline_color = Color(0, 0, 0, 0)
+metadata/_custom_type_script = "uid://63fvpksakuj"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pitch/Wall_Corner_Top_Left"]
+shape = SubResource("RectangleShape2D_707m3")
+
+[node name="Wall_Corner_Bottom_Left" type="StaticBody2D" parent="Pitch"]
+position = Vector2(-344.03, 298)
+rotation = -0.785398
+
+[node name="Square" type="Node2D" parent="Pitch/Wall_Corner_Bottom_Left"]
+script = ExtResource("5_h5wwd")
+size = Vector2(100, 400)
+fill_color = Color(0.34016, 0.48, 0.2592, 1)
+outline_color = Color(0, 0, 0, 0)
+metadata/_custom_type_script = "uid://63fvpksakuj"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pitch/Wall_Corner_Bottom_Left"]
+shape = SubResource("RectangleShape2D_707m3")
+
+[node name="Wall_Corner_Top_Right" type="StaticBody2D" parent="Pitch"]
+position = Vector2(339.424, -298)
+rotation = -0.785398
+
+[node name="Square" type="Node2D" parent="Pitch/Wall_Corner_Top_Right"]
+script = ExtResource("5_h5wwd")
+size = Vector2(100, 400)
+fill_color = Color(0.34016, 0.48, 0.2592, 1)
+outline_color = Color(0, 0, 0, 0)
+metadata/_custom_type_script = "uid://63fvpksakuj"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pitch/Wall_Corner_Top_Right"]
+shape = SubResource("RectangleShape2D_707m3")
+
+[node name="Wall_Corner_Bottom_Right" type="StaticBody2D" parent="Pitch"]
+position = Vector2(339.424, 298)
+rotation = 0.785398
+
+[node name="Square" type="Node2D" parent="Pitch/Wall_Corner_Bottom_Right"]
+script = ExtResource("5_h5wwd")
+size = Vector2(100, 400)
+fill_color = Color(0.34016, 0.48, 0.2592, 1)
+outline_color = Color(0, 0, 0, 0)
+metadata/_custom_type_script = "uid://63fvpksakuj"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pitch/Wall_Corner_Bottom_Right"]
+shape = SubResource("RectangleShape2D_707m3")
+
+[node name="Ball" parent="." instance=ExtResource("1_i3nm5")]
+physics_material_override = SubResource("PhysicsMaterial_k7in6")
+linear_damp = 1.5
+
+[node name="PlayerBall_0_0" parent="." instance=ExtResource("4_i3nm5")]
+position = Vector2(-211, -54)
+shoot_key = 68
+alt_shoot_key = 4194322
+
+[node name="ShapeEntity" parent="PlayerBall_0_0" index="0"]
+color = Color(0.7998, 0, 0.20998, 1)
+
+[node name="FillBG" parent="PlayerBall_0_0/ShapeEntity" index="1"]
+fill_color = Color(0.7998, 0, 0.20998, 1)
+
+[node name="PlayerBall_0_1" parent="." instance=ExtResource("4_i3nm5")]
+position = Vector2(-100, 59)
+alt_shoot_key = 4194328
+
+[node name="ShapeEntity" parent="PlayerBall_0_1" index="0"]
+color = Color(1, 1, 1, 1)
+
+[node name="FillBG" parent="PlayerBall_0_1/ShapeEntity" index="1"]
+fill_color = Color(1, 1, 1, 1)
+
+[node name="PlayerBall_1_0" parent="." instance=ExtResource("4_i3nm5")]
+position = Vector2(100, -59)
+rotation = 3.14159
+shoot_key = 74
+alt_shoot_key = 4194326
+
+[node name="ShapeEntity" parent="PlayerBall_1_0" index="0"]
+rotation = -3.14159
+color = Color(0.18, 0.316667, 1, 1)
+
+[node name="FillBG" parent="PlayerBall_1_0/ShapeEntity" index="1"]
+fill_color = Color(0.18, 0.316667, 1, 1)
+
+[node name="PlayerBall_1_1" parent="." instance=ExtResource("4_i3nm5")]
+position = Vector2(211, 54)
+rotation = 3.14159
+shoot_key = 75
+alt_shoot_key = 4194320
+
+[node name="ShapeEntity" parent="PlayerBall_1_1" index="0"]
+rotation = -3.14159
+color = Color(0.846575, 0.699116, 3.85046e-07, 1)
+
+[node name="FillBG" parent="PlayerBall_1_1/ShapeEntity" index="1"]
+fill_color = Color(0.846575, 0.699116, 3.85046e-07, 1)
+
+[editable path="PlayerBall_0_0"]
+[editable path="PlayerBall_0_1"]
+[editable path="PlayerBall_1_0"]
+[editable path="PlayerBall_1_1"]

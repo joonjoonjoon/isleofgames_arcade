@@ -16,8 +16,13 @@ var charge_right: float
 var start_position: Vector3
 var start_rotation: Vector3
 
-var restart_time: float
+var restart_time: int
 var last_grunt_time: float
+
+var head_idle: Node3D
+var head_loss: Node3D
+var head_win: Node3D
+var head_matchloss: Node3D
 
 func _ready() -> void:
     arm_right = $Torso/Arm_Right/TargetHinge
@@ -25,6 +30,10 @@ func _ready() -> void:
     leg_right = $Torso/Leg_Right/TargetHinge
     leg_left = $Torso/Leg_Left/TargetHinge
     torso = $Torso
+    head_idle = $Torso/Head/Heads/Head_Idle
+    head_loss = $Torso/Head/Heads/Head_Loss
+    head_win = $Torso/Head/Heads/Head_Win
+    head_matchloss = $Torso/Head/Heads/Head_MatchLoss
     start_position = torso.position
     start_rotation = torso.rotation
     restart_time = Time.get_ticks_msec()
@@ -87,3 +96,9 @@ func reset_guy() -> void:
     torso.linear_velocity = Vector3.ZERO
     torso.angular_velocity = Vector3.ZERO
     restart_time = Time.get_ticks_msec()
+
+func set_active_head(head: String) -> void:
+    head_idle.visible = head == "idle"
+    head_loss.visible = head == "loss"
+    head_win.visible = head == "win"
+    head_matchloss.visible = head == "matchloss"

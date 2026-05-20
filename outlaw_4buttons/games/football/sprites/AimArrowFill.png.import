@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ceejuqqvc0qeb"
-path="res://.godot/imported/TMP Icons.png-226c144f9790495337f2f108019d9219.ctex"
+uid="uid://cmsm74b15fcb4"
+path="res://.godot/imported/AimArrowFill.png-02860fbd657c592b8e2736bdfdb01de3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://games/volleyball/sprites/TMP Icons.png"
-dest_files=["res://.godot/imported/TMP Icons.png-226c144f9790495337f2f108019d9219.ctex"]
+source_file="res://games/football/sprites/AimArrowFill.png"
+dest_files=["res://.godot/imported/AimArrowFill.png-02860fbd657c592b8e2736bdfdb01de3.ctex"]
 
 [params]
 

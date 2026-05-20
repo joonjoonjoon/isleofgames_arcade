@@ -14,3 +14,19 @@ config/name="isleofgames_arcade"
 run/main_scene="uid://c8pbu72t5wdff"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=2560
+window/size/viewport_height=1440
+window/size/mode=3
+window/stretch/mode="canvas_items"
+
+[physics]
+
+common/physics_ticks_per_second=120
+3d/physics_engine="Jolt Physics (Extension)"
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(0.862745, 0.819608, 0.760784, 1)

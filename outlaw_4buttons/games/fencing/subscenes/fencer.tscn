@@ -1,0 +1,160 @@
+[gd_scene load_steps=7 format=3 uid="uid://c353f3vrxmqf6"]
+
+[ext_resource type="PackedScene" uid="uid://c1eqgygspftd" path="res://meshes/boxman.fbx" id="1_x3ptm"]
+[ext_resource type="Script" uid="uid://b2w266jbdyibu" path="res://scripts/fencer.gd" id="2_0a180"]
+[ext_resource type="Material" uid="uid://0tgyhixsl3qx" path="res://materials/weapon_highlight.tres" id="3_0a180"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_x3ptm"]
+size = Vector3(0.001, 0.001, 0.001)
+
+[sub_resource type="SphereMesh" id="SphereMesh_x3ptm"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_0a180"]
+
+[node name="Fencer" instance=ExtResource("1_x3ptm")]
+script = ExtResource("2_0a180")
+
+[node name="Armature" parent="." index="0"]
+transform = Transform3D(100, 0, 0, 0, -4.37114e-06, 100, 0, -100, -4.37114e-06, 0, 0, 0)
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/0/position = Vector3(0.000172619, -0.00542122, 0.00405497)
+bones/0/rotation = Quaternion(0.782767, 0.258663, 0.395617, 0.404793)
+bones/1/position = Vector3(0, 0.00710303, 0)
+bones/1/rotation = Quaternion(-0.0443405, -0.0251204, -0.00111533, 0.9987)
+bones/1/scale = Vector3(1, 1, 1)
+bones/2/position = Vector3(0, 0.00089277, 0)
+bones/2/rotation = Quaternion(-0.0405104, -0.0815524, -0.00656439, 0.995824)
+bones/2/scale = Vector3(1, 1, 1)
+bones/4/position = Vector3(0.00172837, 0.006561, 2.17621e-09)
+bones/4/rotation = Quaternion(0.541534, 0.701697, 0.0688, -0.457852)
+bones/4/scale = Vector3(1, 1, 1)
+bones/5/position = Vector3(4.43872e-10, 0.00311308, 5.15597e-11)
+bones/5/rotation = Quaternion(0.521462, -0.000136629, -0.520143, 0.676409)
+bones/5/scale = Vector3(1, 1, 1)
+bones/7/position = Vector3(0.000988915, 0.000302607, 1.33534e-09)
+bones/7/rotation = Quaternion(0.157177, 0.284224, 0.938628, -0.116145)
+bones/7/scale = Vector3(1, 1, 1)
+bones/8/position = Vector3(-5.10252e-11, 0.00431385, -4.25315e-11)
+bones/8/rotation = Quaternion(-0.596463, -5.05522e-06, -0.0985352, 0.79657)
+bones/8/scale = Vector3(1, 1, 1)
+bones/10/position = Vector3(-0.00172837, 0.006561, 2.17621e-09)
+bones/10/rotation = Quaternion(-0.562794, 0.404621, 0.698272, 0.178776)
+bones/10/scale = Vector3(1, 1, 1)
+bones/11/position = Vector3(-4.43872e-10, 0.00311308, 5.15597e-11)
+bones/11/rotation = Quaternion(0.379437, 0.000170445, 0.378477, 0.844265)
+bones/11/scale = Vector3(1, 1, 1)
+bones/13/position = Vector3(-0.000988915, 0.000302607, 1.33534e-09)
+bones/13/rotation = Quaternion(-0.27927, 0.621361, 0.700474, 0.212733)
+bones/13/scale = Vector3(1, 1, 1)
+bones/14/position = Vector3(5.10252e-11, 0.00431385, -4.25315e-11)
+bones/14/rotation = Quaternion(-0.484298, 5.31715e-06, 0.0800057, 0.871238)
+bones/14/scale = Vector3(1, 1, 1)
+bones/16/position = Vector3(5.58804e-05, 0.00330245, 0.000990837)
+bones/16/rotation = Quaternion(0.720661, -0.693007, -0.014229, -0.0136829)
+bones/17/position = Vector3(-1.81563e-07, 1.40022e-07, 4.16736e-07)
+bones/17/rotation = Quaternion(0.964187, 0.00820917, -0.00820712, 0.264969)
+bones/17/scale = Vector3(1, 1, 1)
+bones/19/position = Vector3(0.00273804, -1.65352e-05, 0.017483)
+bones/19/rotation = Quaternion(0.549899, -0.609059, -0.376822, -0.429724)
+bones/20/position = Vector3(-3.60233e-07, -5.37669e-08, -1.39342e-07)
+bones/20/rotation = Quaternion(-0.707098, 0.00360079, 0.00359805, 0.707098)
+bones/20/scale = Vector3(1, 1, 1)
+bones/22/position = Vector3(-1.96576e-05, -0.00482594, 0.000961245)
+bones/22/rotation = Quaternion(0, 0.999805, 0, -0.0197405)
+bones/23/position = Vector3(-3.90178e-08, -1.41263e-07, 2.97813e-07)
+bones/23/rotation = Quaternion(0.964187, -0.00820917, 0.00820712, 0.264969)
+bones/23/scale = Vector3(1, 1, 1)
+bones/25/position = Vector3(-0.0012129, -0.00695721, 0.0109884)
+bones/25/rotation = Quaternion(-0.014047, 0.85327, 0.521151, 0.0115681)
+bones/26/position = Vector3(1.70898e-08, -1.0225e-07, -7.97451e-08)
+bones/26/rotation = Quaternion(-0.707098, -0.00360079, -0.00359805, 0.707098)
+bones/26/scale = Vector3(1, 1, 1)
+
+[node name="WeaponTip" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="2"]
+transform = Transform3D(-0.999234, -0.0152738, -0.0360253, -0.00285434, -0.889766, 0.456408, -0.0390252, 0.456161, 0.889041, -0.00123203, -0.00807116, 0.0115594)
+bone_name = "Hand.R_end"
+bone_idx = 27
+
+[node name="Offset" type="Node3D" parent="Armature/Skeleton3D/WeaponTip" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00031611, 0.00943477, 5.47981e-05)
+
+[node name="Mesh" type="MeshInstance3D" parent="Armature/Skeleton3D/WeaponTip/Offset" index="0"]
+transform = Transform3D(0.261586, -1.10595e-09, -7.27596e-10, -5.23869e-10, 0.261586, 2.23517e-08, 6.98492e-10, 0, 0.261586, 0, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_x3ptm")
+skeleton = NodePath("../..")
+
+[node name="MidWeapon" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="3"]
+transform = Transform3D(-0.999234, -0.0152738, -0.0360253, -0.00285434, -0.889766, 0.456408, -0.0390252, 0.456161, 0.889041, -0.00123203, -0.00807116, 0.0115594)
+bone_name = "Hand.R_end"
+bone_idx = 27
+
+[node name="Offset" type="Node3D" parent="Armature/Skeleton3D/MidWeapon" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00031611, 0.00470892, 5.47978e-05)
+
+[node name="Mesh" type="MeshInstance3D" parent="Armature/Skeleton3D/MidWeapon/Offset" index="0"]
+transform = Transform3D(0.261586, -1.10595e-09, -7.27596e-10, -5.23869e-10, 0.261586, 2.23517e-08, 6.98492e-10, 0, 0.261586, 0, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_x3ptm")
+skeleton = NodePath("../..")
+
+[node name="Hand" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="4"]
+transform = Transform3D(-0.999234, -0.0152738, -0.0360253, -0.00285434, -0.889766, 0.456408, -0.0390252, 0.456161, 0.889041, -0.00123203, -0.00807116, 0.0115594)
+bone_name = "Hand.R_end"
+bone_idx = 27
+
+[node name="Offset" type="Node3D" parent="Armature/Skeleton3D/Hand" index="0"]
+
+[node name="Mesh" type="MeshInstance3D" parent="Armature/Skeleton3D/Hand/Offset" index="0"]
+transform = Transform3D(0.261586, -1.10595e-09, -7.27596e-10, -5.23869e-10, 0.261586, 2.23517e-08, 6.98492e-10, 0, 0.261586, 0, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_x3ptm")
+skeleton = NodePath("../..")
+
+[node name="Shoulder" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="5"]
+transform = Transform3D(0.553161, 0.0846596, 0.828762, 0.725231, -0.538473, -0.429053, 0.409942, 0.838379, -0.35926, 0.000172619, -0.00542122, 0.00405497)
+bone_name = "Torso"
+bone_idx = 0
+
+[node name="Offset" type="Node3D" parent="Armature/Skeleton3D/Shoulder" index="0"]
+transform = Transform3D(1, 7.45058e-09, 0, 2.23517e-08, 1, -2.98023e-08, -4.47035e-08, 5.96046e-08, 1, -0.00208653, 0.00692048, 0.00181924)
+
+[node name="Mesh" type="MeshInstance3D" parent="Armature/Skeleton3D/Shoulder/Offset" index="0"]
+transform = Transform3D(0.000745665, -7.27596e-11, -2.91038e-11, 5.82077e-11, 0.000745665, -2.91038e-11, -1.45519e-10, 2.91038e-11, 0.000745665, 0, 0, 0)
+visible = false
+mesh = SubResource("SphereMesh_x3ptm")
+skeleton = NodePath("../..")
+
+[node name="ParryIndicator" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="6"]
+transform = Transform3D(-0.999234, -0.0152738, -0.0360253, -0.00285434, -0.889766, 0.456408, -0.0390252, 0.456161, 0.889041, -0.00121291, -0.00695733, 0.0109884)
+bone_name = "Hand.R"
+bone_idx = 26
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Armature/Skeleton3D/ParryIndicator" index="0"]
+transform = Transform3D(0.000141413, -0.000367818, 7.99958e-08, 5.01484e-06, 0.010372, -2.33996e-06, 2.53607e-09, 0.000146008, 0.000166426, -0.000152523, 0.00578575, 1.70452e-05)
+mesh = SubResource("BoxMesh_0a180")
+surface_material_override/0 = ExtResource("3_0a180")
+
+[node name="AttackIndicator" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="7"]
+transform = Transform3D(-0.999234, -0.0152738, -0.0360253, -0.00285434, -0.889766, 0.456408, -0.0390252, 0.456161, 0.889041, -0.00121291, -0.00695733, 0.0109884)
+bone_name = "Hand.R"
+bone_idx = 26
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Armature/Skeleton3D/AttackIndicator" index="0"]
+transform = Transform3D(0.000141413, -0.000367818, 7.99958e-08, 5.01484e-06, 0.010372, -2.33996e-06, 2.53606e-09, 0.000146008, 0.000166426, -0.000152523, 0.00578575, 1.70452e-05)
+mesh = SubResource("BoxMesh_0a180")
+surface_material_override/0 = ExtResource("3_0a180")
+
+[node name="RootMotionView" type="RootMotionView" parent="Armature" index="1"]
+animation_path = NodePath("../../AnimationPlayer")
+
+[node name="AnimationPlayer" parent="." index="1"]
+root_motion_track = NodePath("Armature/Skeleton3D:Torso")
+root_motion_local = false
+playback_auto_capture = false
+
+[node name="BotLabel" type="Label3D" parent="." index="2"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 2.13459, 0)
+billboard = 1
+text = "BOT"

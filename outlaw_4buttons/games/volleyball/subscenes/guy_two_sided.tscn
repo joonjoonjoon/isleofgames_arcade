@@ -1,11 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://b130xr2rok7xf"]
+[gd_scene load_steps=16 format=3 uid="uid://b130xr2rok7xf"]
 
 [ext_resource type="Script" uid="uid://df4qr027cb2dc" path="res://scripts/guy_two_sided.gd" id="1_yv0h8"]
 [ext_resource type="Texture2D" uid="uid://qohwllbv2enq" path="res://sprites/torso_upper.tres" id="3_mfg7i"]
 [ext_resource type="Texture2D" uid="uid://bp1vrm7ngkde2" path="res://sprites/torso_lower.tres" id="4_bkebe"]
+[ext_resource type="Texture2D" uid="uid://drq3wi75ftsx5" path="res://sprites/head_pigeon_idle.png" id="5_mfpuj"]
 [ext_resource type="Script" uid="uid://daoyu1d7s8e8o" path="res://scripts/target_hinge.gd" id="5_ywqmq"]
-[ext_resource type="Texture2D" uid="uid://ch54hko5m7ixa" path="res://sprites/head.tres" id="7_mfpuj"]
-[ext_resource type="Texture2D" uid="uid://u27y27ohcpv" path="res://sprites/eye.tres" id="8_neh7d"]
+[ext_resource type="Texture2D" uid="uid://bokkkxkn6as38" path="res://sprites/head_pigeon_loss.png" id="6_neh7d"]
+[ext_resource type="Texture2D" uid="uid://vhgof2hyjk36" path="res://sprites/head_pigeon_match_win.png" id="7_0mhqd"]
+[ext_resource type="Texture2D" uid="uid://0g5vy6dafkcg" path="res://sprites/head_pigeon_match_loss.png" id="8_ywqmq"]
 [ext_resource type="Texture2D" uid="uid://b016o0qroy0xs" path="res://sprites/arm_right.tres" id="10_0mhqd"]
 [ext_resource type="Texture2D" uid="uid://dsd1s4hmtog2v" path="res://sprites/leg_right.tres" id="15_lpy81"]
 
@@ -70,28 +72,34 @@ node_b = NodePath("../..")
 script = ExtResource("5_ywqmq")
 min_angle = -60.0
 max_angle = 60.0
-max_impulse = 0.2
+max_impulse = 0.02
 no_slack = true
 
-[node name="Head" type="Sprite3D" parent="Torso/Head"]
-transform = Transform3D(0.0842356, 3.49246e-10, 0, -3.49246e-10, 0.0842356, 0, 0, 0, 0.0842356, -0.0358183, 0.140141, 0)
-sorting_offset = 1.0
-modulate = Color(0.247059, 0.403922, 0.439216, 1)
-texture = ExtResource("7_mfpuj")
+[node name="Heads" type="Node3D" parent="Torso/Head"]
+transform = Transform3D(1, 9.31323e-10, 0, -9.31323e-10, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="Eye" type="Sprite3D" parent="Torso/Head"]
-transform = Transform3D(0.0842356, 4.07454e-10, 0, -4.07454e-10, 0.0842356, 0, 0, 0, 0.0842356, -0.0011063, 0.176322, 0)
-sorting_offset = 2.0
-texture = ExtResource("8_neh7d")
+[node name="Head_Idle" type="Sprite3D" parent="Torso/Head/Heads"]
+transform = Transform3D(0.0754549, 4.65661e-10, 0, -4.65661e-10, 0.0754549, 0, 0, 0, 0.0754549, -0.000561091, 0.18544, 0)
+sorting_offset = -1.0
+texture = ExtResource("5_mfpuj")
 
-[node name="Eye2" type="Sprite3D" parent="Torso/Head"]
-transform = Transform3D(0.0543931, 0.0100684, 0, -0.0100684, 0.0543931, 0, 0, 0, 0.0553171, -0.0011063, 0.176322, 0)
-sorting_offset = 3.0
-modulate = Color(0, 0, 0, 1)
-texture = ExtResource("8_neh7d")
+[node name="Head_Loss" type="Sprite3D" parent="Torso/Head/Heads"]
+transform = Transform3D(0.075455, 4.65661e-10, 0, -4.65661e-10, 0.075455, 0, 0, 0, 0.0754549, -0.00891105, 0.18551, 0)
+visible = false
+sorting_offset = -1.0
+texture = ExtResource("6_neh7d")
 
-[node name="Head_Target" type="Node3D" parent="Torso/Head"]
-transform = Transform3D(1, 9.31323e-10, 0, -9.31323e-10, 1, 0, 0, 0, 1, -0.00377097, 0.177018, 0)
+[node name="Head_Win" type="Sprite3D" parent="Torso/Head/Heads"]
+transform = Transform3D(0.075455, 5.82077e-10, 0, -5.82077e-10, 0.075455, 0, 0, 0, 0.0754549, -0.00470686, 0.188955, 0)
+visible = false
+sorting_offset = -1.0
+texture = ExtResource("7_0mhqd")
+
+[node name="Head_MatchLoss" type="Sprite3D" parent="Torso/Head/Heads"]
+transform = Transform3D(0.075455, 6.98492e-10, 0, -6.98492e-10, 0.075455, 0, 0, 0, 0.0754549, -0.00267112, 0.185496, 0)
+visible = false
+sorting_offset = -1.0
+texture = ExtResource("8_ywqmq")
 
 [node name="Arm_Right" type="RigidBody3D" parent="Torso"]
 transform = Transform3D(0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0, 1, 0.163043, 0.189574, 0)
@@ -208,3 +216,6 @@ sorting_offset = -10.0
 gi_mode = 0
 modulate = Color(0.247059, 0.403922, 0.439216, 1)
 texture = ExtResource("15_lpy81")
+
+[node name="Head_Target" type="Node3D" parent="Torso"]
+transform = Transform3D(0.999965, -0.00839496, 0, 0.00839496, 0.999965, 0, 0, 0, 1, -0.00181436, 0.417469, 0)
