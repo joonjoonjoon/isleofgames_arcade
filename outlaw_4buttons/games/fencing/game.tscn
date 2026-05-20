@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://bqsdaq5b85gwu"]
 
-[ext_resource type="Script" uid="uid://bnf4yi187h8hq" path="res://scripts/game_manager.gd" id="1_e2o6t"]
-[ext_resource type="PackedScene" uid="uid://c353f3vrxmqf6" path="res://subscenes/fencer.tscn" id="2_e2o6t"]
-[ext_resource type="Material" uid="uid://dsj680sdtoou3" path="res://materials/parry_particles.tres" id="3_feb5d"]
+[ext_resource type="Script" uid="uid://bnf4yi187h8hq" path="res://games/fencing/scripts/game_manager_fencing.gd" id="1_e2o6t"]
+[ext_resource type="PackedScene" uid="uid://c353f3vrxmqf6" path="res://games/fencing/subscenes/fencer.tscn" id="2_e2o6t"]
+[ext_resource type="Material" uid="uid://dsj680sdtoou3" path="res://games/fencing/materials/parry_particles.tres" id="3_feb5d"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_e2o6t"]
 font_size = 136

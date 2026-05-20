@@ -673,6 +673,7 @@ size = 0.415
 
 [node name="Particles_0" type="GPUParticles3D" parent="."]
 transform = Transform3D(-1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 0, 4.09264, 3.03101)
+visible = false
 emitting = false
 amount = 16
 process_material = SubResource("ParticleProcessMaterial_vxge7")
@@ -680,6 +681,7 @@ draw_pass_1 = SubResource("QuadMesh_6b10g")
 
 [node name="Particles_1" type="GPUParticles3D" parent="."]
 transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 4.09264, 3.03101)
+visible = false
 emitting = false
 amount = 16
 process_material = SubResource("ParticleProcessMaterial_vxge7")

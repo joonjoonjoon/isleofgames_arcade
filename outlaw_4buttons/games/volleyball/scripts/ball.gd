@@ -23,7 +23,7 @@ func make_trail() -> void:
     ball_color = ball_color.lerp(bg_color, 0.2)
     for i in range(trail_count):
         var new_ball = $MeshInstance3D.duplicate()
-        get_tree().root.add_child(new_ball)
+        get_tree().root.get_node("Joints3D").add_child(new_ball)
         new_ball.global_position = global_position
         trail_scale *= 0.9
         new_ball.scale = Vector3.ONE * trail_scale
