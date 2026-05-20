@@ -51,10 +51,21 @@ var bot_label: Node3D
 
 @export var is_ai_player: bool
 
+#button1 = p1 parry
+#button2 = p1 lunge
+#button3 = p2 lunge
+#button4 = p2 parry
+
 func _ready() -> void:
     anim_player = $AnimationPlayer
-    parry_action = "parry_" + str(player_id)
-    lunge_action = "lunge_" + str(player_id)
+    print(player_id)
+    parry_action = "button_1"
+    lunge_action = "button_2"
+    
+    if(player_id == 1):
+        parry_action = "button_4"
+        lunge_action = "button_3"
+    
     bot_label = $BotLabel
     weapon_tip = $Armature/Skeleton3D/WeaponTip/Offset
     mid_weapon = $Armature/Skeleton3D/MidWeapon/Offset
@@ -102,27 +113,24 @@ func _process(delta: float) -> void:
             lunge_start()
             did_input = true
     elif current_state == State.LUNGE:
+        lunge_process(delta)
         if state_timer < 0.2 and wants_to_parry:
             feint_start()
             did_input = true
-        else:
-            lunge_process(delta)
     elif current_state == State.SUPER_LUNGE:
         super_lunge_process(delta)
     elif current_state == State.FEINT:
+        feint_process(delta)
         if wants_to_lunge:
             lunge_start()
-        else:
-            feint_process(delta)
     elif current_state == State.PARRY:
+        parry_process(delta)
         if state_timer < 0.2 and wants_to_lunge:
             super_lunge_start()
             did_input = true
         elif wants_to_parry:
             backstep_start()
             did_input = true
-        else:
-            parry_process(delta)
     elif current_state == State.BACKSTEP:
         backstep_process(delta)
     elif current_state == State.KNOCKED:
@@ -151,7 +159,6 @@ func idle_start() -> void:
     play_anim(idle_anim)
 
 func lunge_start() -> void:
-    AudioManager_fencing.play_lunge()
     current_state = State.LUNGE
     state_timer = 0
     play_anim(prelunge_anim)
@@ -163,9 +170,9 @@ func lunge_process(delta: float) -> void:
         is_attacking = true
         play_anim(lunge_anim)
     if state_timer < lunge_time:
-        var lunge_distance: float = 0.5
+        var lunge_distance: float = 1.5
         global_position += global_basis.z * smoothed_value(lunge_time, state_timer, lunge_distance, delta)
-    if state_timer >= lunge_time and state_timer - delta < lunge_time:
+    if state_timer >= lunge_time:
         play_anim(lunge2_anim)
     if state_timer >= lunge_time + 0.2:
         global_position += global_basis.z * 0.5
@@ -208,19 +215,20 @@ func feint_process(delta: float) -> void:
 
 func parry_start() -> void:
     current_state = State.PARRY
+    global_position -= global_basis.z * 0.2
     state_timer = 0
     play_anim(parry_anim)
     is_parrying = true
 
-var parry_time: float = 0.3
+var parry_time: float = 0.4
 func parry_process(delta: float) -> void:
     # if state_timer < 0.1:
     #     global_position -= global_basis.z * smoothed_value(0.1, state_timer, 0.5, delta)
     if state_timer < parry_time:
         is_parrying = true
-    if state_timer >= parry_time and state_timer < delta - parry_time:
+    if state_timer >= parry_time:
         play_anim(parry2_anim)
-    if state_timer >= parry_time + 0.2:
+    if state_timer >= parry_time + 0.1:
         idle_start()
 
 func parry_recover() -> void:
@@ -276,5 +284,5 @@ func check_parry_state() -> bool:
     return is_parrying and current_state == State.PARRY
 
 func check_both_pressed() -> bool:
-    return (Input.is_action_pressed(parry_action) and Input.is_action_pressed(lunge_action)) or \
-        (Input.is_action_pressed(parry_action) and Input.is_action_pressed(lunge_action))
+    return (Input.is_action_pressed(parry_action) and Input.is_action_just_pressed(lunge_action)) or \
+        (Input.is_action_just_pressed(parry_action) and Input.is_action_pressed(lunge_action))

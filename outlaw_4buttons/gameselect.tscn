@@ -13,6 +13,7 @@ grow_vertical = 2
 script = ExtResource("1_2upq0")
 
 [node name="Button2" type="Button" parent="."]
+layout_mode = 0
 offset_left = 304.0
 offset_top = 281.0
 offset_right = 510.0
@@ -30,6 +31,7 @@ text = "footboll"
 script = ExtResource("1_oxu1g")
 
 [node name="Button3" type="Button" parent="."]
+layout_mode = 0
 offset_left = 318.0
 offset_top = 357.0
 offset_right = 524.0

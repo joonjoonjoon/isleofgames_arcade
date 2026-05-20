@@ -46,15 +46,13 @@ func _ready() -> void:
     left_fills.append($UI/ScorePanel/Left1/Fill)
     left_fills.append($UI/ScorePanel/Left2/Fill)
     update_score_fills()
-    Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+    #Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
     call_deferred("start_match")
 
 var reset_timer: float
-var fencer0_bot_timer: float
-var fencer1_bot_timer: float
 func _process(delta: float) -> void:
     if Input.is_key_pressed(KEY_ESCAPE):
-        get_tree().quit()
+        get_tree().change_scene_to_file("res://gameselect.tscn")
 
     if Input.is_key_pressed(KEY_R):
         reset_timer += delta
@@ -64,27 +62,13 @@ func _process(delta: float) -> void:
         reset_timer = 0
 
     if current_state == GameState.START_DELAY:
-        var bot_pressed: bool = false
-        if fencer_0.check_both_pressed():
-            bot_pressed = true
-            fencer0_bot_timer += delta
-            if fencer0_bot_timer >= 1:
-                fencer0_bot_timer = 0
-                fencer_0.is_ai_player = not fencer_0.is_ai_player
-                start_match()
-        else:
-            fencer0_bot_timer = 0
-        if fencer_1.check_both_pressed():
-            bot_pressed = true
-            fencer1_bot_timer += delta
-            if fencer1_bot_timer >= 1:
-                fencer1_bot_timer = 0
-                fencer_1.is_ai_player = not fencer_1.is_ai_player
-                start_match()
-        else:
-            fencer1_bot_timer = 0
-        if not bot_pressed:
-            start_process(delta)
+        start_process(delta)
+        #if fencer_0.check_both_pressed():
+            #fencer_0.is_ai_player = not fencer_0.is_ai_player
+            #start_match()
+        #if fencer_1.check_both_pressed():
+            #fencer_1.is_ai_player = not fencer_1.is_ai_player
+            #start_match()
     elif current_state == GameState.FENCING:
         if not state_label.text.is_empty() and Time.get_ticks_msec() - bout_start_time > 1000:
             state_label.text = ""
@@ -103,7 +87,7 @@ func resolve_collisions() -> void:
     var weapon_1: float = fencer_1.weapon_tip.global_position.x
     var shoulder_0: float = fencer_0.shoulder.global_position.x
     var shoulder_1: float = fencer_1.shoulder.global_position.x
-    var hit_buffer_time: int = 1
+    var hit_buffer_time: int = 50
     if weapon_0 > weapon_1:
         if fencer_0.check_attack_state() and fencer_1.check_attack_state():
             clang()
@@ -119,28 +103,28 @@ func resolve_collisions() -> void:
             fencer_0_hit_buffer = true
             fencer_0_hit_buffer_time = Time.get_ticks_msec()
     if fencer_0_hit_buffer:
-        if fencer_1.check_attack_state():
+        if Time.get_ticks_msec() - fencer_0_hit_buffer_time > hit_buffer_time:
+            point(0)
+            return
+        elif fencer_1.check_attack_state():
             clang()
             return
         elif fencer_1.check_parry_state():
             parry(1)
-            return
-        elif Time.get_ticks_msec() - fencer_0_hit_buffer_time > hit_buffer_time:
-            point(0)
             return
     if weapon_1 < shoulder_0:
         if not fencer_1_hit_buffer and fencer_1.check_attack_state() and not fencer_0.check_parry_state():
             fencer_1_hit_buffer = true
             fencer_1_hit_buffer_time = Time.get_ticks_msec()
     if fencer_1_hit_buffer:
-        if fencer_0.check_attack_state():
+        if Time.get_ticks_msec() - fencer_1_hit_buffer_time > hit_buffer_time:
+            point(1)
+            return
+        elif fencer_0.check_attack_state():
             clang()
             return
         elif fencer_0.check_parry_state():
             parry(0)
-            return
-        elif Time.get_ticks_msec() - fencer_1_hit_buffer_time > hit_buffer_time:
-            point(1)
             return
 
 func clang() -> void:
@@ -159,6 +143,8 @@ func clang() -> void:
     await get_tree().create_timer(0.1).timeout
     parry_flash.global_position = fencer_0.mid_weapon.global_position
     parry_flash_particles.emitting = true
+    fencer_0.global_position += fencer_0.global_basis.z * 0.5
+    fencer_1.global_position += fencer_1.global_basis.z * 0.5
     fencer_0.knock_start(0.2)
     fencer_1.knock_start(0.2)
     fencer_0.is_frozen = false
