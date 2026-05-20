@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bjavef0qjokd6"]
+[gd_scene load_steps=10 format=3 uid="uid://yax11l33l8su"]
 
 [ext_resource type="Script" uid="uid://d4k0fnixu6n0b" path="res://games/volleyball/scripts/debug_draw.gd" id="1_h83qq"]
 [ext_resource type="Script" uid="uid://k7vdkyl8uunx" path="res://games/volleyball/scripts/game_manager.gd" id="1_pdrv3"]

@@ -14,31 +14,36 @@ script = ExtResource("1_2upq0")
 
 [node name="Button2" type="Button" parent="."]
 layout_mode = 0
-offset_left = 304.0
-offset_top = 281.0
-offset_right = 510.0
-offset_bottom = 338.0
+offset_left = 391.0
+offset_top = 151.0
+offset_right = 557.0
+offset_bottom = 348.0
 text = "volleyball"
 script = ExtResource("1_oxu1g")
+button_id = "button_2"
+game = 1
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 310.0
-offset_top = 200.0
-offset_right = 516.0
-offset_bottom = 257.0
+offset_left = 139.0
+offset_top = 147.0
+offset_right = 302.0
+offset_bottom = 352.0
 text = "footboll"
 script = ExtResource("1_oxu1g")
+button_id = "button_1"
 
 [node name="Button3" type="Button" parent="."]
 layout_mode = 0
-offset_left = 318.0
-offset_top = 357.0
-offset_right = 524.0
-offset_bottom = 414.0
+offset_left = 639.0
+offset_top = 139.0
+offset_right = 813.0
+offset_bottom = 349.0
 text = "fencing
 "
 script = ExtResource("1_oxu1g")
+button_id = "button_3"
+game = 2
 
 [connection signal="pressed" from="Button2" to="Button2" method="_on_pressed_volleyball"]
 [connection signal="pressed" from="Button" to="Button2" method="_on_pressed_football"]

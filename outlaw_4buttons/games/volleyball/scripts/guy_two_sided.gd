@@ -1,9 +1,7 @@
 extends Node3D
 
-@export var key_left: Key
-@export var key_left_alt: Key
-@export var key_right: Key
-@export var key_right_alt: Key
+@export var key_left: String
+@export var key_right: String
 @export var is_flipped: bool
 var arm_right: TargetHinge
 var arm_left: TargetHinge
@@ -40,8 +38,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
     var can_input: bool = Time.get_ticks_msec() - restart_time > 500
-    var left_pressed: bool = can_input and (Input.is_key_label_pressed(key_left if not is_flipped else key_right) or Input.is_key_label_pressed(key_left_alt if not is_flipped else key_right_alt))
-    var right_pressed: bool = can_input and (Input.is_key_label_pressed(key_right if not is_flipped else key_left) or Input.is_key_label_pressed(key_right_alt if not is_flipped else key_left_alt))
+    var left_pressed: bool = can_input and (Input.is_action_pressed(key_left if not is_flipped else key_right))
+    var right_pressed: bool = can_input and (Input.is_action_pressed(key_right if not is_flipped else key_left))
 
     var arm_target: float = 69
     var leg_target: float = 89

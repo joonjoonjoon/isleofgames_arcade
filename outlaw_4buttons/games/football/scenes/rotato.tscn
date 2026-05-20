@@ -276,9 +276,8 @@ physics_material_override = SubResource("PhysicsMaterial_k7in6")
 linear_damp = 1.5
 
 [node name="PlayerBall_0_0" parent="." instance=ExtResource("4_i3nm5")]
-position = Vector2(-211, -54)
-shoot_key = 68
-alt_shoot_key = 4194322
+position = Vector2(-146, -166)
+shoot_key = "button_1"
 
 [node name="ShapeEntity" parent="PlayerBall_0_0" index="0"]
 color = Color(0.7998, 0, 0.20998, 1)
@@ -288,7 +287,7 @@ fill_color = Color(0.7998, 0, 0.20998, 1)
 
 [node name="PlayerBall_0_1" parent="." instance=ExtResource("4_i3nm5")]
 position = Vector2(-100, 59)
-alt_shoot_key = 4194328
+shoot_key = "button_2"
 
 [node name="ShapeEntity" parent="PlayerBall_0_1" index="0"]
 color = Color(1, 1, 1, 1)
@@ -299,8 +298,7 @@ fill_color = Color(1, 1, 1, 1)
 [node name="PlayerBall_1_0" parent="." instance=ExtResource("4_i3nm5")]
 position = Vector2(100, -59)
 rotation = 3.14159
-shoot_key = 74
-alt_shoot_key = 4194326
+shoot_key = "button_3"
 
 [node name="ShapeEntity" parent="PlayerBall_1_0" index="0"]
 rotation = -3.14159
@@ -312,8 +310,7 @@ fill_color = Color(0.18, 0.316667, 1, 1)
 [node name="PlayerBall_1_1" parent="." instance=ExtResource("4_i3nm5")]
 position = Vector2(211, 54)
 rotation = 3.14159
-shoot_key = 75
-alt_shoot_key = 4194320
+shoot_key = "button_4"
 
 [node name="ShapeEntity" parent="PlayerBall_1_1" index="0"]
 rotation = -3.14159

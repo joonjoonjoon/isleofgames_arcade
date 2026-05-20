@@ -80,7 +80,7 @@ func _process(delta: float) -> void:
     else:
         reset_key_pressed = false
         reset_timer = 0.0 # Reset counter if key released early
-    if Input.is_key_pressed(KEY_ESCAPE):
+    if Input.is_action_just_pressed("reset"):
         get_tree().change_scene_to_file("res://gameselect.tscn")
     if (score_fill_0 > 0 or score_fill_1 > 0) and Time.get_ticks_msec() - last_input_time > 60000:
         hard_reset()

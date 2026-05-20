@@ -1,8 +1,24 @@
 extends Button
 
 
+@export var button_id: String;
 
+enum Games {
+    FOOTBALL,
+    VOLLEYBALL,
+    FENCING
+}
+@export var game: Games;
 
+func _process(_delta):
+    if Input.is_action_just_pressed(button_id):
+        match game:
+            Games.FOOTBALL:
+                _on_pressed_football()
+            Games.VOLLEYBALL:
+                _on_pressed_volleyball()
+            Games.FENCING:
+                _on_pressed_fencing()
 
 func _on_pressed_football():
     # 2D Game

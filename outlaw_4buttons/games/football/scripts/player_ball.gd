@@ -8,8 +8,7 @@ enum PlayerBallState {
 }
 var current_state: PlayerBallState
 
-@export var shoot_key: Key
-@export var alt_shoot_key: Key
+@export var shoot_key: String
 var aimer: Node2D
 var aim_fill: Node2D
 var charge: float
@@ -26,19 +25,20 @@ func _ready() -> void:
     aim_fill.position.x = 0
     aim_direction = rotation
 
+
 func _process(delta: float) -> void:
     aim_fill.position.x = charge * -62
     if current_state == PlayerBallState.AIMING:
         aim_direction += delta * 4
         aim_direction = wrapf(aim_direction, -PI, PI)
         aimer.global_rotation = aim_direction
-        if Input.is_key_pressed(shoot_key) or Input.is_key_pressed(alt_shoot_key):
+        if Input.is_action_pressed(shoot_key):
             current_state = PlayerBallState.CHARGING
     if current_state == PlayerBallState.CHARGING:
         aimer.global_rotation = aim_direction
         charge += delta
         charge = min(charge, 1)
-        if not (Input.is_key_pressed(shoot_key) or Input.is_key_pressed(alt_shoot_key)):
+        if not Input.is_action_pressed(shoot_key):
             aimer.visible = false
             var shoot_direction: Vector2 = Vector2.RIGHT.rotated(aim_direction)
             apply_impulse(shoot_direction * (250 + charge * 600))

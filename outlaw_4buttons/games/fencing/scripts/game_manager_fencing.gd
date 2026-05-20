@@ -51,15 +51,15 @@ func _ready() -> void:
 
 var reset_timer: float
 func _process(delta: float) -> void:
-    if Input.is_key_pressed(KEY_ESCAPE):
+    if Input.is_action_just_pressed("reset"):
         get_tree().change_scene_to_file("res://gameselect.tscn")
 
-    if Input.is_key_pressed(KEY_R):
-        reset_timer += delta
-        if reset_timer >= 2:
-            hard_reset()
-    else:
-        reset_timer = 0
+    # if Input.is_key_pressed(KEY_R):
+    #     reset_timer += delta
+    #     if reset_timer >= 2:
+    #         hard_reset()
+    # else:
+    #     reset_timer = 0
 
     if current_state == GameState.START_DELAY:
         start_process(delta)
