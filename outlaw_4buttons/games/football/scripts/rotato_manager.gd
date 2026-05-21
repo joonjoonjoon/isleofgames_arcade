@@ -57,8 +57,8 @@ func _start_play() -> void:
         player.freeze_player()
     current_state = GameState.PRE_START
     ball.global_transform.origin = Vector2.ZERO
-    var position_1: Vector2 = Vector2(-140, -50)
-    var position_0: Vector2 = Vector2(-220, 50)
+    var position_0: Vector2 = Vector2(-140, -50)
+    var position_1: Vector2 = Vector2(-220, 50)
     left_team[0].global_transform.origin = position_0
     left_team[1].global_transform.origin = position_1
     position_0.x *= -1
@@ -66,8 +66,8 @@ func _start_play() -> void:
     position_0.y = position_1.y
     position_1.x *= -1
     position_1.y = other_y
-    right_team[1].global_transform.origin = position_0
-    right_team[0].global_transform.origin = position_1
+    right_team[0].global_transform.origin = position_0
+    right_team[1].global_transform.origin = position_1
 
     var start_delay: float = 2
     for i in range(3):

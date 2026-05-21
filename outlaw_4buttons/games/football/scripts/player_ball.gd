@@ -25,11 +25,12 @@ func _ready() -> void:
     aim_fill.position.x = 0
     aim_direction = rotation
 
-
+var rotate_direction: int = 1
+var shot_cooldown: float
 func _process(delta: float) -> void:
     aim_fill.position.x = charge * -62
     if current_state == PlayerBallState.AIMING:
-        aim_direction += delta * 4
+        aim_direction += delta * rotate_direction * 3
         aim_direction = wrapf(aim_direction, -PI, PI)
         aimer.global_rotation = aim_direction
         if Input.is_action_pressed(shoot_key):
@@ -40,11 +41,19 @@ func _process(delta: float) -> void:
         charge = min(charge, 1)
         if not Input.is_action_pressed(shoot_key):
             aimer.visible = false
+            shot_cooldown = 0.5
+            rotate_direction *= -1
             var shoot_direction: Vector2 = Vector2.RIGHT.rotated(aim_direction)
-            apply_impulse(shoot_direction * (250 + charge * 600))
+            linear_velocity = shoot_direction * (550 + charge * 1200)
+            #apply_impulse(shoot_direction * (550 + charge * 1200))
             charge = 0
             current_state = PlayerBallState.MOVING
             stop_timer = 0.1
+    if current_state == PlayerBallState.MOVING:
+        shot_cooldown -= delta
+        if shot_cooldown <= 0:
+            current_state = PlayerBallState.AIMING
+            aimer.visible = true
 
 func _physics_process(delta: float) -> void:
     speed = linear_velocity.length()
@@ -57,6 +66,7 @@ func _physics_process(delta: float) -> void:
             linear_velocity = Vector2.ZERO
             angular_velocity = 0
             current_state = PlayerBallState.AIMING
+            aim_direction += PI
             aimer.visible = true
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:

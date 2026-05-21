@@ -102,7 +102,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/line_spacing = -4
 theme_override_font_sizes/font_size = 28
 text = "Made by Torfi & Joon
-2 to 4 players"
+2 players"
 
 [node name="Spacer" type="Container" parent="Games List/Game 1"]
 custom_minimum_size = Vector2(0, 60)
@@ -167,8 +167,8 @@ offset_bottom = 575.93
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/line_spacing = -4
 theme_override_font_sizes/font_size = 28
-text = "Made by Torfi & Joon
-2 to 4 players"
+text = "Made by Torfi
+2 or 4 players"
 
 [node name="Spacer" type="Container" parent="Games List/Game 2"]
 custom_minimum_size = Vector2(0, 60)
@@ -231,8 +231,8 @@ offset_bottom = 575.93
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/line_spacing = -4
 theme_override_font_sizes/font_size = 28
-text = "Made by Torfi & Joon
-2 to 4 players"
+text = "Made by Torfi
+2 players"
 
 [node name="Spacer" type="Container" parent="Games List/Game 3"]
 custom_minimum_size = Vector2(0, 60)
