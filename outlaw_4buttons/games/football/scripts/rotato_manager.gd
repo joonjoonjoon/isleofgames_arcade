@@ -13,6 +13,9 @@ var left_score_text: Node
 var right_score_text: Node
 var state_text: Label
 
+const MENU_RESET_HOLD_TIME: float = 3.0
+var menu_reset_timer: float = 0.0
+
 func _ready() -> void:
     goal_left = $Pitch/Goal_Left
     goal_right = $Pitch/Goal_Right
@@ -34,8 +37,12 @@ func _ready() -> void:
     _start_play()
 
 func _process(delta: float) -> void:
-    if Input.is_action_just_pressed("reset"):
-        get_tree().change_scene_to_file("res://gameselect.tscn")
+    if Input.is_action_pressed("reset"):
+        menu_reset_timer += delta
+        if menu_reset_timer >= MENU_RESET_HOLD_TIME:
+            get_tree().change_scene_to_file("res://gameselect.tscn")
+    else:
+        menu_reset_timer = 0.0
     if Input.is_action_just_pressed("ui_accept"):
         _goal_scored(0)
 

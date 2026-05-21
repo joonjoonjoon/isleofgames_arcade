@@ -58,6 +58,9 @@ var reset_key_pressed: bool
 var reset_timer: float = 0.0 # Counter for delay
 const RESET_DELAY: float = 2.0 # 5 second delay
 
+const MENU_RESET_HOLD_TIME: float = 3.0
+var menu_reset_timer: float = 0.0
+
 func _process(delta: float) -> void:
     if current_state == GameState.SERVING and not ball.sleeping:
         current_state = GameState.PLAYING
@@ -80,8 +83,12 @@ func _process(delta: float) -> void:
     else:
         reset_key_pressed = false
         reset_timer = 0.0 # Reset counter if key released early
-    if Input.is_action_just_pressed("reset"):
-        get_tree().change_scene_to_file("res://gameselect.tscn")
+    if Input.is_action_pressed("reset"):
+        menu_reset_timer += delta
+        if menu_reset_timer >= MENU_RESET_HOLD_TIME:
+            get_tree().change_scene_to_file("res://gameselect.tscn")
+    else:
+        menu_reset_timer = 0.0
     if (score_fill_0 > 0 or score_fill_1 > 0) and Time.get_ticks_msec() - last_input_time > 60000:
         hard_reset()
 

@@ -49,17 +49,16 @@ func _ready() -> void:
     #Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
     call_deferred("start_match")
 
-var reset_timer: float
-func _process(delta: float) -> void:
-    if Input.is_action_just_pressed("reset"):
-        get_tree().change_scene_to_file("res://gameselect.tscn")
+const MENU_RESET_HOLD_TIME: float = 3.0
+var menu_reset_timer: float = 0.0
 
-    # if Input.is_key_pressed(KEY_R):
-    #     reset_timer += delta
-    #     if reset_timer >= 2:
-    #         hard_reset()
-    # else:
-    #     reset_timer = 0
+func _process(delta: float) -> void:
+    if Input.is_action_pressed("reset"):
+        menu_reset_timer += delta
+        if menu_reset_timer >= MENU_RESET_HOLD_TIME:
+            get_tree().change_scene_to_file("res://gameselect.tscn")
+    else:
+        menu_reset_timer = 0.0
 
     if current_state == GameState.START_DELAY:
         start_process(delta)
