@@ -59,6 +59,8 @@ var reset_timer: float = 0.0 # Counter for delay
 const RESET_DELAY: float = 2.0 # 5 second delay
 
 const MENU_RESET_HOLD_TIME: float = 3.0
+const MENU_SCENE: String = "res://gameselect.tscn"
+
 var menu_reset_timer: float = 0.0
 
 func _process(delta: float) -> void:
@@ -186,7 +188,12 @@ func end_match() -> void:
     else:
         victory_particles_1.emitting = true
     await get_tree().create_timer(8.0, true, false, true).timeout
-    hard_reset()
+    _return_to_menu()
+
+func _return_to_menu() -> void:
+    Engine.time_scale = 1.0
+    RenderingServer.set_default_clear_color(Color("#fcba03"))
+    get_tree().change_scene_to_file(MENU_SCENE)
 
 var _cancel_reset := false
 

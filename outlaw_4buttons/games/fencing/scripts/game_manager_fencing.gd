@@ -50,6 +50,8 @@ func _ready() -> void:
     call_deferred("start_match")
 
 const MENU_RESET_HOLD_TIME: float = 3.0
+const MENU_SCENE: String = "res://gameselect.tscn"
+
 var menu_reset_timer: float = 0.0
 
 func _process(delta: float) -> void:
@@ -193,12 +195,15 @@ func point(side: int) -> void:
         fencer_0.anim_player.play("Armature|Salute2")
         fencer_1.anim_player.play("Armature|Salute2")
         await get_tree().create_timer(2.5, true, false, true).timeout
-        score = 0
-        update_score_fills()
-        fencer_0.anim_player.play("Armature|Waiting")
-        fencer_1.anim_player.play("Armature|Waiting")
+        _return_to_menu()
+        return
     state_label.text = ""
     start_match()
+
+func _return_to_menu() -> void:
+    Engine.time_scale = 1.0
+    RenderingServer.set_default_clear_color(Color("#fcba03"))
+    get_tree().change_scene_to_file(MENU_SCENE)
 
 var countdown_timer: float
 func start_match() -> void:

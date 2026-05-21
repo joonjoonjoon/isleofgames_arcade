@@ -14,7 +14,12 @@ var right_score_text: Node
 var state_text: Label
 
 const MENU_RESET_HOLD_TIME: float = 3.0
+const WIN_SCORE: int = 3
+const MENU_SCENE: String = "res://gameselect.tscn"
+
 var menu_reset_timer: float = 0.0
+var left_score: int = 0
+var right_score: int = 0
 
 func _ready() -> void:
     goal_left = $Pitch/Goal_Left
@@ -83,13 +88,23 @@ func _goal_scored(side: int) -> void:
     for player in all_players:
         player.freeze_player()
     if side == 0:
+        right_score += 1
         state_text.text = "RIGHT SCORES!!!"
-        # right_score_text.visible = true
     else:
+        left_score += 1
         state_text.text = "LEFT SCORES!!!"
-        # left_score_text.visible = true
     await get_tree().create_timer(2).timeout
-    _start_play()
+    if left_score >= WIN_SCORE or right_score >= WIN_SCORE:
+        state_text.text = "LEFT WINS!!!" if left_score >= WIN_SCORE else "RIGHT WINS!!!"
+        await get_tree().create_timer(3).timeout
+        _return_to_menu()
+    else:
+        _start_play()
+
+func _return_to_menu() -> void:
+    Engine.time_scale = 1.0
+    RenderingServer.set_default_clear_color(Color("#fcba03"))
+    get_tree().change_scene_to_file(MENU_SCENE)
 
 func set_body_position(body: RigidBody2D, new_position: Vector2) -> void:
     body.global_position = new_position
