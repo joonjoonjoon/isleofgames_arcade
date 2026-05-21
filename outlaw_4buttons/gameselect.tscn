@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://c8pbu72t5wdff"]
+[gd_scene load_steps=9 format=3 uid="uid://c8pbu72t5wdff"]
 
 [ext_resource type="Script" uid="uid://32ber5533303" path="res://gameselect.gd" id="1_2upq0"]
 [ext_resource type="Script" uid="uid://gelre36pow8d" path="res://gameselectbutton.gd" id="1_oxu1g"]
+[ext_resource type="FontFile" uid="uid://hn7p1aedmv14" path="res://fonts/les_flos/Les Flos Chaos.otf" id="2_lxhwu"]
+[ext_resource type="Texture2D" uid="uid://m7aj7snkkyrf" path="res://images/panel.png" id="2_yygeg"]
+[ext_resource type="Texture2D" uid="uid://b6cpxpx0jgidg" path="res://images/volley.png" id="3_31y74"]
+[ext_resource type="Texture2D" uid="uid://bewedbusb6df5" path="res://images/button.png" id="4_y2qmg"]
+[ext_resource type="Texture2D" uid="uid://dgaymqnvomym3" path="res://images/foot.png" id="6_i0o01"]
+[ext_resource type="Texture2D" uid="uid://c3klwinur6m6p" path="res://images/fencing.png" id="7_ibbw6"]
 
 [node name="Gameselect" type="Control"]
 layout_mode = 3
@@ -12,29 +18,309 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2upq0")
 
-[node name="Button2" type="Button" parent="."]
+[node name="Title Text" type="Label" parent="."]
+layout_mode = 2
+offset_top = 56.0
+offset_right = 2560.0
+offset_bottom = 223.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_lxhwu")
+theme_override_font_sizes/font_size = 140
+text = "THE OUTLAW"
+horizontal_alignment = 1
+
+[node name="Title Sub Text" type="Label" parent="."]
+layout_mode = 2
+offset_top = 221.0
+offset_right = 2560.0
+offset_bottom = 388.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Made by Joon, Torfi, Karim, Esi and Isle of Games"
+horizontal_alignment = 1
+
+[node name="Games List" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(200, 600)
+layout_mode = 2
+offset_left = 197.0
+offset_top = 362.07
+offset_right = 2363.0
+offset_bottom = 1362.07
+size_flags_stretch_ratio = 0.0
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="Game 1" type="VBoxContainer" parent="Games List"]
+custom_minimum_size = Vector2(504, 1000)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Games List/Game 1"]
+custom_minimum_size = Vector2(504, 626)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_yygeg")
+
+[node name="Label" type="Label" parent="Games List/Game 1/TextureRect"]
+layout_mode = 2
+offset_top = 21.93
+offset_right = 504.0
+offset_bottom = 134.93
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_lxhwu")
+theme_override_font_sizes/font_size = 60
+text = "Volleyball 
+maybe?"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Games List/Game 1/TextureRect"]
 layout_mode = 0
+offset_left = 20.0
+offset_top = 189.93
+offset_right = 484.0
+offset_bottom = 477.93
+texture = ExtResource("3_31y74")
+
+[node name="Label2" type="Label" parent="Games List/Game 1/TextureRect"]
+layout_mode = 2
+offset_left = 20.0
+offset_top = 501.93
+offset_right = 356.0
+offset_bottom = 575.93
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -4
+theme_override_font_sizes/font_size = 28
+text = "Made by Torfi & Joon
+2 to 4 players"
+
+[node name="Spacer" type="Container" parent="Games List/Game 1"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Button Image" type="TextureRect" parent="Games List/Game 1"]
+modulate = Color(1, 0, 0, 1)
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+texture = ExtResource("4_y2qmg")
+stretch_mode = 5
+
+[node name="Label3" type="Label" parent="Games List/Game 1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "Hold to start"
+horizontal_alignment = 1
+
+[node name="Game 2" type="VBoxContainer" parent="Games List"]
+custom_minimum_size = Vector2(504, 1000)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Games List/Game 2"]
+custom_minimum_size = Vector2(504, 626)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_yygeg")
+
+[node name="Label" type="Label" parent="Games List/Game 2/TextureRect"]
+layout_mode = 2
+offset_top = 21.93
+offset_right = 504.0
+offset_bottom = 134.93
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_lxhwu")
+theme_override_font_sizes/font_size = 60
+text = "Football
+probably?"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Games List/Game 2/TextureRect"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 189.93
+offset_right = 484.0
+offset_bottom = 477.93
+texture = ExtResource("6_i0o01")
+
+[node name="Label2" type="Label" parent="Games List/Game 2/TextureRect"]
+layout_mode = 2
+offset_left = 20.0
+offset_top = 501.93
+offset_right = 356.0
+offset_bottom = 575.93
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -4
+theme_override_font_sizes/font_size = 28
+text = "Made by Torfi & Joon
+2 to 4 players"
+
+[node name="Spacer" type="Container" parent="Games List/Game 2"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="Games List/Game 2"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+texture = ExtResource("4_y2qmg")
+stretch_mode = 5
+
+[node name="Label3" type="Label" parent="Games List/Game 2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "Hold to start"
+horizontal_alignment = 1
+
+[node name="Game 3" type="VBoxContainer" parent="Games List"]
+custom_minimum_size = Vector2(504, 1000)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Games List/Game 3"]
+custom_minimum_size = Vector2(504, 626)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_yygeg")
+
+[node name="Label" type="Label" parent="Games List/Game 3/TextureRect"]
+layout_mode = 2
+offset_top = 21.93
+offset_right = 504.0
+offset_bottom = 134.93
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_lxhwu")
+theme_override_font_sizes/font_size = 60
+text = "Fencing
+perhaps"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Games List/Game 3/TextureRect"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 189.93
+offset_right = 484.0
+offset_bottom = 477.93
+texture = ExtResource("7_ibbw6")
+
+[node name="Label2" type="Label" parent="Games List/Game 3/TextureRect"]
+layout_mode = 2
+offset_left = 20.0
+offset_top = 501.93
+offset_right = 356.0
+offset_bottom = 575.93
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -4
+theme_override_font_sizes/font_size = 28
+text = "Made by Torfi & Joon
+2 to 4 players"
+
+[node name="Spacer" type="Container" parent="Games List/Game 3"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="Games List/Game 3"]
+modulate = Color(0, 0, 1, 1)
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+texture = ExtResource("4_y2qmg")
+stretch_mode = 5
+
+[node name="Label3" type="Label" parent="Games List/Game 3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "Hold to start"
+horizontal_alignment = 1
+
+[node name="Game 4" type="VBoxContainer" parent="Games List"]
+custom_minimum_size = Vector2(504, 1000)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Games List/Game 4"]
+custom_minimum_size = Vector2(504, 626)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_yygeg")
+
+[node name="Label" type="Label" parent="Games List/Game 4/TextureRect"]
+layout_mode = 2
+offset_top = 21.93
+offset_right = 504.0
+offset_bottom = 134.93
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_lxhwu")
+theme_override_font_sizes/font_size = 60
+text = "A game 
+by you?"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="Games List/Game 4/TextureRect"]
+layout_mode = 2
+offset_top = 213.93
+offset_right = 504.0
+offset_bottom = 389.93
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_lxhwu")
+theme_override_font_sizes/font_size = 160
+text = "?"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Games List/Game 4/TextureRect"]
+layout_mode = 2
+offset_left = 20.0
+offset_top = 501.93
+offset_right = 356.0
+offset_bottom = 575.93
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -4
+theme_override_font_sizes/font_size = 28
+text = "Make something for 
+the next festival maybe?"
+
+[node name="Spacer" type="Container" parent="Games List/Game 4"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="Games List/Game 4"]
+modulate = Color(1, 1, 0, 1)
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+texture = ExtResource("4_y2qmg")
+stretch_mode = 5
+
+[node name="Label3" type="Label" parent="Games List/Game 4"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "Nothing here yet"
+horizontal_alignment = 1
+
+[node name="Debug Buttons" type="Node" parent="."]
+
+[node name="Button2" type="Button" parent="Debug Buttons"]
+visible = false
 offset_left = 391.0
 offset_top = 151.0
 offset_right = 557.0
 offset_bottom = 348.0
 text = "volleyball"
 script = ExtResource("1_oxu1g")
-button_id = "button_2"
+button_id = "button_1"
 game = 1
 
-[node name="Button" type="Button" parent="."]
-layout_mode = 0
+[node name="Button" type="Button" parent="Debug Buttons"]
+visible = false
 offset_left = 139.0
 offset_top = 147.0
 offset_right = 302.0
 offset_bottom = 352.0
 text = "footboll"
 script = ExtResource("1_oxu1g")
-button_id = "button_1"
+button_id = "button_2"
 
-[node name="Button3" type="Button" parent="."]
-layout_mode = 0
+[node name="Button3" type="Button" parent="Debug Buttons"]
+visible = false
 offset_left = 639.0
 offset_top = 139.0
 offset_right = 813.0
@@ -45,6 +331,6 @@ script = ExtResource("1_oxu1g")
 button_id = "button_3"
 game = 2
 
-[connection signal="pressed" from="Button2" to="Button2" method="_on_pressed_volleyball"]
-[connection signal="pressed" from="Button" to="Button2" method="_on_pressed_football"]
-[connection signal="pressed" from="Button3" to="Button3" method="_on_pressed_fencing"]
+[connection signal="pressed" from="Debug Buttons/Button2" to="Debug Buttons/Button2" method="_on_pressed_volleyball"]
+[connection signal="pressed" from="Debug Buttons/Button" to="Debug Buttons/Button2" method="_on_pressed_football"]
+[connection signal="pressed" from="Debug Buttons/Button3" to="Debug Buttons/Button3" method="_on_pressed_fencing"]
