@@ -46,21 +46,31 @@ func _ready() -> void:
     left_fills.append($UI/ScorePanel/Left1/Fill)
     left_fills.append($UI/ScorePanel/Left2/Fill)
     update_score_fills()
+    last_input_time = Time.get_ticks_msec()
     #Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
     call_deferred("start_match")
 
+func _input(event: InputEvent) -> void:
+    if event.is_pressed() and not event.is_echo():
+        last_input_time = Time.get_ticks_msec()
+
 const MENU_RESET_HOLD_TIME: float = 3.0
+const IDLE_TIMEOUT_MS: int = 60000
 const MENU_SCENE: String = "res://gameselect.tscn"
 
 var menu_reset_timer: float = 0.0
+var last_input_time: int = 0
+var _returning_to_menu: bool = false
 
 func _process(delta: float) -> void:
     if Input.is_action_pressed("reset"):
         menu_reset_timer += delta
         if menu_reset_timer >= MENU_RESET_HOLD_TIME:
-            get_tree().change_scene_to_file("res://gameselect.tscn")
+            _return_to_menu()
     else:
         menu_reset_timer = 0.0
+    if Time.get_ticks_msec() - last_input_time > IDLE_TIMEOUT_MS:
+        _return_to_menu()
 
     if current_state == GameState.START_DELAY:
         start_process(delta)
@@ -201,6 +211,9 @@ func point(side: int) -> void:
     start_match()
 
 func _return_to_menu() -> void:
+    if _returning_to_menu:
+        return
+    _returning_to_menu = true
     Engine.time_scale = 1.0
     RenderingServer.set_default_clear_color(Color("#fcba03"))
     get_tree().change_scene_to_file(MENU_SCENE)

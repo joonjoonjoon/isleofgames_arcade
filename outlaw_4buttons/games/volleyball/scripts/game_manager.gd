@@ -59,9 +59,11 @@ var reset_timer: float = 0.0 # Counter for delay
 const RESET_DELAY: float = 2.0 # 5 second delay
 
 const MENU_RESET_HOLD_TIME: float = 3.0
+const IDLE_TIMEOUT_MS: int = 60000
 const MENU_SCENE: String = "res://gameselect.tscn"
 
 var menu_reset_timer: float = 0.0
+var _returning_to_menu: bool = false
 
 func _process(delta: float) -> void:
     if current_state == GameState.SERVING and not ball.sleeping:
@@ -73,26 +75,14 @@ func _process(delta: float) -> void:
         score_stake = lerpf(score_stake, 0.3, 1.0 - exp(-0.1 * delta))
         score_bar_left.set_target_stake_fill(score_stake)
         score_bar_right.set_target_stake_fill(score_stake)
-    # if Input.is_key_pressed(KEY_R):
-    #     if not reset_key_pressed:
-    #         reset_key_pressed = true
-    #         reset_timer = 0.0 # Start counting
-    #     else:
-    #         reset_timer += delta # Increment timer
-    #         if reset_timer >= RESET_DELAY:
-    #             hard_reset()
-    #             reset_key_pressed = false # Prevent repeated resets
-    else:
-        reset_key_pressed = false
-        reset_timer = 0.0 # Reset counter if key released early
     if Input.is_action_pressed("reset"):
         menu_reset_timer += delta
         if menu_reset_timer >= MENU_RESET_HOLD_TIME:
-            get_tree().change_scene_to_file("res://gameselect.tscn")
+            _return_to_menu()
     else:
         menu_reset_timer = 0.0
-    if (score_fill_0 > 0 or score_fill_1 > 0) and Time.get_ticks_msec() - last_input_time > 60000:
-        hard_reset()
+    if Time.get_ticks_msec() - last_input_time > IDLE_TIMEOUT_MS:
+        _return_to_menu()
 
 func _physics_process(delta: float) -> void:
     if put_ball_to_sleep:
@@ -108,7 +98,7 @@ func _on_ball_body_entered(body: Node) -> void:
             score(1)
 
 func _input(event: InputEvent) -> void:
-    if event is InputEventKey:
+    if event.is_pressed() and not event.is_echo():
         last_input_time = Time.get_ticks_msec()
 
 func score(side: int) -> void:
@@ -191,6 +181,9 @@ func end_match() -> void:
     _return_to_menu()
 
 func _return_to_menu() -> void:
+    if _returning_to_menu:
+        return
+    _returning_to_menu = true
     Engine.time_scale = 1.0
     RenderingServer.set_default_clear_color(Color("#fcba03"))
     get_tree().change_scene_to_file(MENU_SCENE)
