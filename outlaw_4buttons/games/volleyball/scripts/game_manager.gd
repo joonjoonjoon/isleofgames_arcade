@@ -73,15 +73,15 @@ func _process(delta: float) -> void:
         score_stake = lerpf(score_stake, 0.3, 1.0 - exp(-0.1 * delta))
         score_bar_left.set_target_stake_fill(score_stake)
         score_bar_right.set_target_stake_fill(score_stake)
-    if Input.is_key_pressed(KEY_R):
-        if not reset_key_pressed:
-            reset_key_pressed = true
-            reset_timer = 0.0 # Start counting
-        else:
-            reset_timer += delta # Increment timer
-            if reset_timer >= RESET_DELAY:
-                hard_reset()
-                reset_key_pressed = false # Prevent repeated resets
+    # if Input.is_key_pressed(KEY_R):
+    #     if not reset_key_pressed:
+    #         reset_key_pressed = true
+    #         reset_timer = 0.0 # Start counting
+    #     else:
+    #         reset_timer += delta # Increment timer
+    #         if reset_timer >= RESET_DELAY:
+    #             hard_reset()
+    #             reset_key_pressed = false # Prevent repeated resets
     else:
         reset_key_pressed = false
         reset_timer = 0.0 # Reset counter if key released early
